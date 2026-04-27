@@ -29,9 +29,9 @@ public class EngineStateDisplaySource extends DisplaySource {
 
 
         } else if(context.getSourceBlockEntity() instanceof LargeDieselGeneratorBlockEntity sourceBE) {
-            LargeDieselGeneratorBlockEntity frontEngine = sourceBE.frontEngine.get();
+            LargeDieselGeneratorBlockEntity frontEngine = sourceBE.controller.get();
             if(frontEngine != null)
-                if(frontEngine.validFuel)
+                if(frontEngine.getGeneratedSpeed() != 0)
                     return List.of(
                             Component.translatable("createdieselgenerators.display_source.engine_status").append(" : "),
                             Component.translatable("createdieselgenerators.display_source.speed").append(Math.abs(frontEngine.getGeneratedSpeed()) + Component.translatable("create.generic.unit.rpm").toString()),
