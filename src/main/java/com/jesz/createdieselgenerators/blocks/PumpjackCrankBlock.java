@@ -1,5 +1,6 @@
 package com.jesz.createdieselgenerators.blocks;
 
+import com.jesz.createdieselgenerators.CDGBlocks;
 import com.jesz.createdieselgenerators.blocks.entity.BlockEntityRegistry;
 import com.jesz.createdieselgenerators.blocks.entity.PumpjackCrankBlockEntity;
 import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
@@ -93,7 +94,7 @@ public class PumpjackCrankBlock extends HorizontalKineticBlock implements IBE<Pu
 
         @Override
         public Predicate<ItemStack> getItemPredicate() {
-            return BlockRegistry.PUMPJACK_BEARING::isIn;
+            return CDGBlocks.PUMPJACK_BEARING::isIn;
         }
 
         @Override
@@ -108,8 +109,8 @@ public class PumpjackCrankBlock extends HorizontalKineticBlock implements IBE<Pu
                 boolean isLarge = world.getBlockEntity(pos) instanceof PumpjackCrankBlockEntity crankBE && crankBE.crankSize.getValue() == 1;
                 if(world.getBlockState(pos.above(isLarge ? 4 : 3)).getBlock() instanceof AirBlock)
                     return PlacementOffset.success(pos.above(isLarge ? 4 : 3))
-                            .withTransform((b) -> BlockRegistry.PUMPJACK_BEARING_B.getDefaultState().setValue(PumpjackBearingBBlock.FACING, state.getValue(HORIZONTAL_FACING)))
-                            .withGhostState(BlockRegistry.PUMPJACK_BEARING_B.getDefaultState().setValue(PumpjackBearingBBlock.FACING, state.getValue(HORIZONTAL_FACING)));
+                            .withTransform((b) -> CDGBlocks.PUMPJACK_BEARING_B.getDefaultState().setValue(PumpjackBearingBBlock.FACING, state.getValue(HORIZONTAL_FACING)))
+                            .withGhostState(CDGBlocks.PUMPJACK_BEARING_B.getDefaultState().setValue(PumpjackBearingBBlock.FACING, state.getValue(HORIZONTAL_FACING)));
             }
             return PlacementOffset.fail();
         }

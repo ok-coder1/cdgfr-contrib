@@ -31,10 +31,10 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 
+import static com.jesz.createdieselgenerators.CDGItems.DISTILLATION_CONTROLLER;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.jesz.createdieselgenerators.items.ItemRegistry.DISTILLATION_CONTROLLER;
 
 public class DistillationTankBlock extends Block implements IBE<DistillationTankBlockEntity>, IWrenchable, SpecialBlockItemRequirement {
     public static final BooleanProperty TOP = BooleanProperty.create("top");

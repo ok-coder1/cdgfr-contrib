@@ -1,7 +1,8 @@
 package com.jesz.createdieselgenerators.entity;
 
+import com.jesz.createdieselgenerators.CDGConfig;
+import com.jesz.createdieselgenerators.CDGEntityTypes;
 import com.jesz.createdieselgenerators.CreateDieselGenerators;
-import com.jesz.createdieselgenerators.config.ConfigRegistry;
 import com.jesz.createdieselgenerators.other.FuelTypeManager;
 import com.simibubi.create.AllFluids;
 import com.simibubi.create.content.fluids.FluidFX;
@@ -56,7 +57,7 @@ public class ChemicalSprayerProjectileEntity extends AbstractHurtingProjectile {
     }
     int t = 0;
     public static ChemicalSprayerProjectileEntity spray(Level level, FluidStack stack, boolean fire, boolean cooling){
-        ChemicalSprayerProjectileEntity projectile = new ChemicalSprayerProjectileEntity(EntityRegistry.CHEMICAL_SPRAYER_PROJECTILE.get(), level);
+        ChemicalSprayerProjectileEntity projectile = new ChemicalSprayerProjectileEntity(CDGEntityTypes.CHEMICAL_SPRAYER_PROJECTILE.get(), level);
         projectile.stack = stack;
         projectile.fire = fire;
         projectile.cooling = cooling;
@@ -145,7 +146,7 @@ public class ChemicalSprayerProjectileEntity extends AbstractHurtingProjectile {
         setDeltaMovement(getDeltaMovement().add(0, -0.015, 0));
 
         if(fire) {
-            if (FuelTypeManager.getGeneratedSpeed(level().getFluidState(new BlockPos((int) getPosition(1).x, (int) getPosition(1).y, (int) getPosition(1).z)).getType()) != 0 && ConfigRegistry.COMBUSTIBLES_BLOW_UP.get())
+            if (FuelTypeManager.getGeneratedSpeed(level().getFluidState(new BlockPos((int) getPosition(1).x, (int) getPosition(1).y, (int) getPosition(1).z)).getType()) != 0 && CDGConfig.COMBUSTIBLES_BLOW_UP.get())
                 level().explode(null, getX(), getY(), getZ(), 3, Level.ExplosionInteraction.BLOCK);
             else if (level().getFluidState(new BlockPos((int) getPosition(1).x, (int) getPosition(1).y, (int) getPosition(1).z)).is(Fluids.FLOWING_WATER) || level().getFluidState(new BlockPos((int) getPosition(1).x, (int) getPosition(1).y, (int) getPosition(1).z)).is(Fluids.WATER)) {
                 fire = false;

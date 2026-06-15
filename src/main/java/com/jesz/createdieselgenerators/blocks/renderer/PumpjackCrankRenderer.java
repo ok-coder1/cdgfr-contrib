@@ -1,6 +1,6 @@
 package com.jesz.createdieselgenerators.blocks.renderer;
 
-import com.jesz.createdieselgenerators.PartialModels;
+import com.jesz.createdieselgenerators.CDGPartialModels;
 import com.jesz.createdieselgenerators.blocks.entity.PumpjackBearingBlockEntity;
 import com.jesz.createdieselgenerators.blocks.entity.PumpjackCrankBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -39,8 +39,8 @@ public class PumpjackCrankRenderer extends ShaftRenderer<PumpjackCrankBlockEntit
 
         double sin = Mth.sin(v) * (be.crankSize.getValue() == 0 ? 0.8125 : 1.125);
         double cos = Mth.cos(v) * (be.crankSize.getValue() == 0 ? 0.8125 : 1.125);
-        SuperByteBuffer crank = CachedBuffers.partial(be.crankSize.getValue() == 0 ? PartialModels.PUMPJACK_CRANK_SMALL : PartialModels.PUMPJACK_CRANK_LARGE, blockState);
-        SuperByteBuffer rod = CachedBuffers.partial(be.crankSize.getValue() == 0 ? PartialModels.PUMPJACK_CRANK_ROD_SMALL : PartialModels.PUMPJACK_CRANK_ROD_LARGE, blockState);
+        SuperByteBuffer crank = CachedBuffers.partial(be.crankSize.getValue() == 0 ? CDGPartialModels.PUMPJACK_CRANK_SMALL : CDGPartialModels.PUMPJACK_CRANK_LARGE, blockState);
+        SuperByteBuffer rod = CachedBuffers.partial(be.crankSize.getValue() == 0 ? CDGPartialModels.PUMPJACK_CRANK_ROD_SMALL : CDGPartialModels.PUMPJACK_CRANK_ROD_LARGE, blockState);
 
         double dstY = -1000-sin-1.25 - pos.getY();
         double dstX = pos.getX()-cos-0.5 - pos.getX();

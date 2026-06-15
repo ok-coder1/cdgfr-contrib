@@ -1,6 +1,6 @@
 package com.jesz.createdieselgenerators.blocks.renderer;
 
-import com.jesz.createdieselgenerators.PartialModels;
+import com.jesz.createdieselgenerators.CDGPartialModels;
 import com.jesz.createdieselgenerators.blocks.entity.LargeDieselGeneratorBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
@@ -21,16 +21,16 @@ public class LargeDieselGeneratorRenderer extends ShaftRenderer<LargeDieselGener
     @Override
     protected void renderSafe(LargeDieselGeneratorBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
         int angle = (int) (Math.abs(KineticBlockEntityRenderer.getAngleForBe(be, be.getBlockPos(), KineticBlockEntityRenderer.getRotationAxisOf(be))*180/Math.PI) * 3 % 360)/36;
-        CachedBuffers.partial(  angle == 10? PartialModels.MODULAR_ENGINE_PISTONS_0 :
-                                angle == 9 ? PartialModels.MODULAR_ENGINE_PISTONS_1 :
-                                angle == 8 ? PartialModels.MODULAR_ENGINE_PISTONS_2 :
-                                angle == 7 ? PartialModels.MODULAR_ENGINE_PISTONS_3 :
-                                angle == 6 ? PartialModels.MODULAR_ENGINE_PISTONS_4 :
-                                angle == 5 ? PartialModels.MODULAR_ENGINE_PISTONS_4 :
-                                angle == 4 ? PartialModels.MODULAR_ENGINE_PISTONS_3 :
-                                angle == 3 ? PartialModels.MODULAR_ENGINE_PISTONS_2 :
-                                angle == 2 ? PartialModels.MODULAR_ENGINE_PISTONS_1 :
-                                        PartialModels.MODULAR_ENGINE_PISTONS_0
+        CachedBuffers.partial(  angle == 10? CDGPartialModels.MODULAR_ENGINE_PISTONS_0 :
+                                angle == 9 ? CDGPartialModels.MODULAR_ENGINE_PISTONS_1 :
+                                angle == 8 ? CDGPartialModels.MODULAR_ENGINE_PISTONS_2 :
+                                angle == 7 ? CDGPartialModels.MODULAR_ENGINE_PISTONS_3 :
+                                angle == 6 ? CDGPartialModels.MODULAR_ENGINE_PISTONS_4 :
+                                angle == 5 ? CDGPartialModels.MODULAR_ENGINE_PISTONS_4 :
+                                angle == 4 ? CDGPartialModels.MODULAR_ENGINE_PISTONS_3 :
+                                angle == 3 ? CDGPartialModels.MODULAR_ENGINE_PISTONS_2 :
+                                angle == 2 ? CDGPartialModels.MODULAR_ENGINE_PISTONS_1 :
+                                        CDGPartialModels.MODULAR_ENGINE_PISTONS_0
                             , be.getBlockState()).center()
                     .rotateY(be.getBlockState().getValue(FACING).toYRot()).uncenter()
                     .light(light)

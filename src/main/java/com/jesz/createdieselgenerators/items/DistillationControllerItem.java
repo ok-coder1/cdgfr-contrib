@@ -2,7 +2,7 @@ package com.jesz.createdieselgenerators.items;
 
 import javax.annotation.Nonnull;
 
-import com.jesz.createdieselgenerators.blocks.BlockRegistry;
+import com.jesz.createdieselgenerators.CDGBlocks;
 import com.jesz.createdieselgenerators.blocks.entity.DistillationTankBlockEntity;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
@@ -41,8 +41,8 @@ public class DistillationControllerItem extends Item {
                     for (int y = 0; y < height; y++) {
                         if(item.getCount() == 0 && !context.getPlayer().isCreative())
                             break;
-                        context.getLevel().setBlock(cPos.offset(x, y, z), BlockRegistry.DISTILLATION_TANK.getDefaultState(), 1);
-                        context.getLevel().updateNeighborsAt(cPos.offset(x, y, z), BlockRegistry.DISTILLATION_TANK.getDefaultState().getBlock());
+                        context.getLevel().setBlock(cPos.offset(x, y, z), CDGBlocks.DISTILLATION_TANK.getDefaultState(), 1);
+                        context.getLevel().updateNeighborsAt(cPos.offset(x, y, z), CDGBlocks.DISTILLATION_TANK.getDefaultState().getBlock());
                         if(!context.getPlayer().isCreative())
                             item.shrink(1);
                     }

@@ -22,7 +22,8 @@ repositories {
     maven { url = "https://mvn.devos.one/releases/" } // Porting lib
     maven { url = "https://cursemaven.com" } // JEI
     maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" } // Forge Config API Port
-
+    maven { url = "https://maven.latvian.dev/releases/" } // KubeJS and Rhino
+    maven { url = "https://maven.architectury.dev" } // Architectury
     //maven { url = "https://jitpack.io/" } // For Fabric ASM for porting lib
 }
 
@@ -53,6 +54,10 @@ dependencies {
     // at runtime, use the full JEI jar for Fabric
     modRuntimeOnly("mezz.jei:jei-1.20.1-fabric:${jei_version}")
 
+    modImplementation("dev.latvian.mods:kubejs-fabric:${kubejs_version}")
+    modImplementation("dev.latvian.mods:rhino-fabric:1902.2.3-build.284")
+
+    modImplementation("dev.architectury:architectury-fabric:6.6.92")
 }
 
 processResources {

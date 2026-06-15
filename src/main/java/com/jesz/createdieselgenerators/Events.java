@@ -3,7 +3,6 @@ package com.jesz.createdieselgenerators;
 import com.jesz.createdieselgenerators.blocks.DieselGeneratorBlock;
 import com.jesz.createdieselgenerators.blocks.ICDGKinetics;
 import com.jesz.createdieselgenerators.commands.CDGCommands;
-import com.jesz.createdieselgenerators.config.ConfigRegistry;
 import com.jesz.createdieselgenerators.other.CombustionHelper;
 import com.jesz.createdieselgenerators.other.CombustionHelper.*;
 import com.jesz.createdieselgenerators.other.FuelTypeManager;
@@ -111,7 +110,7 @@ public class Events {
      * should probably stop.
      */
     public static void onExplosion(Level level, Explosion explosion, List<Entity> entities, double v) {
-        if (!ConfigRegistry.COMBUSTIBLES_BLOW_UP.get() || level.isClientSide)
+        if (!CDGConfig.COMBUSTIBLES_BLOW_UP.get() || level.isClientSide)
             return;
        
         /**
@@ -204,7 +203,7 @@ public class Events {
             return;
         if (player == null)
             return;
-        if((item instanceof BucketItem || item instanceof MilkBucketItem) && ConfigRegistry.FUEL_TOOLTIPS.get()){
+        if((item instanceof BucketItem || item instanceof MilkBucketItem) && CDGConfig.FUEL_TOOLTIPS.get()){
 
             Fluid fluid = Milk.STILL_MILK.getSource();
             // gonna be honest. i have no idea what this is supposed to do.

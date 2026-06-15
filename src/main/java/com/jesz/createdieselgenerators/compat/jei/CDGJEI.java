@@ -1,18 +1,19 @@
 package com.jesz.createdieselgenerators.compat.jei;
 
 import com.google.common.collect.ImmutableList;
-import com.jesz.createdieselgenerators.blocks.BlockRegistry;
-import com.jesz.createdieselgenerators.config.ConfigRegistry;
-import com.jesz.createdieselgenerators.items.ItemRegistry;
-import com.jesz.createdieselgenerators.other.CDGFuelType;
-import com.jesz.createdieselgenerators.other.FuelTypeManager;
-import com.jesz.createdieselgenerators.recipes.DistillationRecipe;
-import com.jesz.createdieselgenerators.recipes.RecipeRegistry;
+import com.jesz.createdieselgenerators.*;
+import com.jesz.createdieselgenerators.content.bulk_fermenter.BulkFermentingRecipe;
+import com.jesz.createdieselgenerators.content.distillation.DistillationRecipe;
+import com.jesz.createdieselgenerators.content.molds.CastingRecipe;
+import com.jesz.createdieselgenerators.content.tools.hammer.HammerRecipe;
+import com.jesz.createdieselgenerators.content.tools.wire_cutters.WireCuttingRecipe;
+import com.jesz.createdieselgenerators.fuel_type.FuelType;
+import com.jesz.createdieselgenerators.fuel_type.FuelTypeManager;
 import com.simibubi.create.AllBlocks;
+import com.simibubi.create.AllItems;
 import com.simibubi.create.compat.jei.*;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
-import net.createmod.catnip.config.ConfigBase;
 import com.simibubi.create.foundation.gui.menu.AbstractSimiContainerScreen;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import com.simibubi.create.infrastructure.config.AllConfigs;
@@ -21,13 +22,12 @@ import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import mezz.jei.api.registration.IGuiHandlerRegistration;
-import mezz.jei.api.registration.IRecipeCatalystRegistration;
-import mezz.jei.api.registration.IRecipeCategoryRegistration;
-import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.registration.*;
+import net.createmod.catnip.config.ConfigBase;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ItemLike;
@@ -46,7 +46,7 @@ import static com.simibubi.create.compat.jei.CreateJEI.*;
 @ParametersAreNonnullByDefault
 public class CDGJEI implements IModPlugin {
 
-    private static final ResourceLocation ID = new ResourceLocation("createdieselgenerators", "jei_plugin");
+    private static final ResourceLocation ID = CreateDieselGenerators.asResource("jei_plugin");
     @Override
     public ResourceLocation getPluginUid() {
         return ID;
@@ -60,19 +60,53 @@ public class CDGJEI implements IModPlugin {
 
         CreateRecipeCategory<?>
         basin_fermenting = builder(BasinRecipe.class)
-                .addTypedRecipes(RecipeRegistry.BASIN_FERMENTING)
-                .catalyst(BlockRegistry.BASIN_LID::get)
+                .addTypedRecipes(CDGRecipes.BASIN_FERMENTING)
+                .catalyst(CDGBlocks.BASIN_LID::get)
                 .catalyst(AllBlocks.BASIN::get)
-                .doubleItemIcon(AllBlocks.BASIN.get(), BlockRegistry.BASIN_LID.get())
+                .doubleItemIcon(AllBlocks.BASIN.get(), CDGBlocks.BASIN_LID.get())
                 .emptyBackground(177, 100)
                 .build("basin_fermenting", BasinFermentingCategory::new),
+                bulk_fermenting = builder(BulkFermentingRecipe.class)
+                .addTypedRecipes(CDGRecipes.BULK_FERMENTING)
+                .catalyst(CDGBlocks.BULK_FERMENTER::get)
+                .doubleItemIcon(CDGBlocks.BULK_FERMENTER.get(), Items.CLOCK)
+                .emptyBackground(177, 100)
+                .build("bulk_fermenting", BulkFermentingCategory::new),
+        compression_molding = builder(BasinRecipe.class)
+                .addTypedRecipes(CDGRecipes.COMPRESSION_MOLDING)
+                .catalyst(AllBlocks.MECHANICAL_PRESS::get)
+                .catalyst(CDGItems.MOLD::get)
+                .catalyst(AllBlocks.BASIN::get)
+                .doubleItemIcon(AllBlocks.MECHANICAL_PRESS.get(), CDGItems.MOLD.get())
+                .emptyBackground(177, 100)
+                .build("compression_molding", CompressionMoldingCategory::new),
+        casting = builder(CastingRecipe.class)
+                .addTypedRecipes(CDGRecipes.CASTING)
+                .catalyst(AllBlocks.SPOUT::get)
+                .catalyst(CDGItems.MOLD::get)
+                .catalyst(AllBlocks.BASIN::get)
+                .doubleItemIcon(AllBlocks.SPOUT.get(), CDGItems.MOLD.get())
+                .emptyBackground(177, 100)
+                .build("casting", CastingCategory::new),
         distillation = builder(DistillationRecipe.class)
-                .addTypedRecipes(RecipeRegistry.DISTILLATION)
+                .addTypedRecipes(CDGRecipes.DISTILLATION)
                 .catalyst(AllBlocks.FLUID_TANK::get)
-                .catalyst(ItemRegistry.DISTILLATION_CONTROLLER::get)
-                .doubleItemIcon(AllBlocks.FLUID_TANK.get(), ItemRegistry.DISTILLATION_CONTROLLER.get())
+                .catalyst(CDGItems.DISTILLATION_CONTROLLER::get)
+                .doubleItemIcon(AllBlocks.FLUID_TANK.get(), CDGItems.DISTILLATION_CONTROLLER.get())
                 .emptyBackground(177, 200)
-                .build("distillation", DistillationCategory::new);
+                .build("distillation", DistillationCategory::new),
+        hammering = builder(HammerRecipe.class)
+                .addTypedRecipes(CDGRecipes.HAMMERING)
+                .catalyst(CDGItems.HAMMER::get)
+                .doubleItemIcon(CDGItems.HAMMER.get(), AllItems.IRON_SHEET.get())
+                .emptyBackground(177, 55)
+                .build("hammering", HammeringCategory::new),
+        wire_cutting = builder(WireCuttingRecipe.class)
+                .addTypedRecipes(CDGRecipes.WIRE_CUTTING)
+                .catalyst(CDGItems.WIRE_CUTTERS::get)
+                .itemIcon(CDGItems.WIRE_CUTTERS.get())
+                .emptyBackground(177, 55)
+                .build("wire_cutting", WireCuttingCategory::new);
     }
 
     private <T extends Recipe<?>> CategoryBuilder<T> builder(Class<? extends T> recipeClass) {
@@ -87,10 +121,10 @@ public class CDGJEI implements IModPlugin {
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         allCategories.forEach(c -> c.registerRecipes(registration));
-        if(!ConfigRegistry.DIESEL_ENGINE_IN_JEI.get())
+        if(!CDGConfig.DIESEL_ENGINE_IN_JEI.get())
             return;
         FuelTypeManager.tryPopulateTags();
-        for(Map.Entry<Fluid, CDGFuelType> entry : FuelTypeManager.fuelTypes.entrySet())
+        for(Map.Entry<Fluid, FuelType> entry : FuelTypeManager.fuelTypes.entrySet())
             if(entry.getKey().isSource(entry.getKey().defaultFluidState()))
                 registration.addRecipes(DieselEngineJeiRecipeType.DIESEL_COMBUSTION, ImmutableList.of(new DieselEngineJeiRecipeType(entry.getKey())));
     }
@@ -98,12 +132,21 @@ public class CDGJEI implements IModPlugin {
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         allCategories.forEach(c -> c.registerCatalysts(registration));
-        if(ConfigRegistry.NORMAL_ENGINES.get())
-            registration.addRecipeCatalyst(BlockRegistry.DIESEL_ENGINE.asStack(), DieselEngineJeiRecipeType.DIESEL_COMBUSTION);
-        if(ConfigRegistry.MODULAR_ENGINES.get())
-            registration.addRecipeCatalyst(BlockRegistry.MODULAR_DIESEL_ENGINE.asStack(), DieselEngineJeiRecipeType.DIESEL_COMBUSTION);
-        if(ConfigRegistry.HUGE_ENGINES.get())
-            registration.addRecipeCatalyst(BlockRegistry.HUGE_DIESEL_ENGINE.asStack(), DieselEngineJeiRecipeType.DIESEL_COMBUSTION);
+        if(CDGConfig.NORMAL_ENGINES.get())
+            registration.addRecipeCatalyst(CDGBlocks.DIESEL_ENGINE.asStack(), DieselEngineJeiRecipeType.DIESEL_COMBUSTION);
+        if(CDGConfig.MODULAR_ENGINES.get())
+            registration.addRecipeCatalyst(CDGBlocks.MODULAR_DIESEL_ENGINE.asStack(), DieselEngineJeiRecipeType.DIESEL_COMBUSTION);
+        if(CDGConfig.HUGE_ENGINES.get())
+            registration.addRecipeCatalyst(CDGBlocks.HUGE_DIESEL_ENGINE.asStack(), DieselEngineJeiRecipeType.DIESEL_COMBUSTION);
+    }
+
+    @Override
+    public void registerItemSubtypes(ISubtypeRegistration registration) {
+        registration.registerSubtypeInterpreter(CDGItems.MOLD.get(), (stack, uidContext) -> {
+            if (!stack.hasTag() || !stack.getOrCreateTag().contains("Mold"))
+                return "";
+            return "createdieselgenerators:mold:" + stack.getTag().getString("Mold");
+        });
     }
 
     @Override
@@ -256,7 +299,7 @@ public class CDGJEI implements IModPlugin {
             }
 
             CreateRecipeCategory.Info<T> info = new CreateRecipeCategory.Info<>(
-                    new mezz.jei.api.recipe.RecipeType<>(new ResourceLocation("createdieselgenerators", name), recipeClass),
+                    new mezz.jei.api.recipe.RecipeType<>(CreateDieselGenerators.asResource(name), recipeClass),
                     Component.translatable("createdieselgenerators.recipe." + name), background, icon, recipesSupplier, catalysts);
             CreateRecipeCategory<T> category = factory.create(info);
             allCategories.add(category);

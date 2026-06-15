@@ -1,6 +1,6 @@
 package com.jesz.createdieselgenerators.blocks.renderer;
 
-import com.jesz.createdieselgenerators.PartialModels;
+import com.jesz.createdieselgenerators.CDGPartialModels;
 import com.jesz.createdieselgenerators.blocks.entity.PumpjackBearingBlockEntity;
 import com.jesz.createdieselgenerators.blocks.entity.PumpjackCrankBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -42,13 +42,13 @@ public class PumpjackCrankInstance extends KineticBlockEntityVisual<PumpjackCran
 
     public PumpjackCrankInstance(VisualizationContext context, PumpjackCrankBlockEntity blockEntity, float partialTick) {
         super(context, blockEntity, partialTick);
-        crank = instancerProvider().instancer(InstanceTypes.TRANSFORMED, Models.partial(PartialModels.PUMPJACK_CRANK_SMALL))
+        crank = instancerProvider().instancer(InstanceTypes.TRANSFORMED, Models.partial(CDGPartialModels.PUMPJACK_CRANK_SMALL))
                 .createInstance();
-        crank_rod = instancerProvider().instancer(InstanceTypes.TRANSFORMED, Models.partial(PartialModels.PUMPJACK_CRANK_ROD_SMALL))
+        crank_rod = instancerProvider().instancer(InstanceTypes.TRANSFORMED, Models.partial(CDGPartialModels.PUMPJACK_CRANK_ROD_SMALL))
                 .createInstance();
-        large_crank = instancerProvider().instancer(InstanceTypes.TRANSFORMED, Models.partial(PartialModels.PUMPJACK_CRANK_LARGE))
+        large_crank = instancerProvider().instancer(InstanceTypes.TRANSFORMED, Models.partial(CDGPartialModels.PUMPJACK_CRANK_LARGE))
                 .createInstance();
-        large_crank_rod = instancerProvider().instancer(InstanceTypes.TRANSFORMED, Models.partial(PartialModels.PUMPJACK_CRANK_ROD_LARGE))
+        large_crank_rod = instancerProvider().instancer(InstanceTypes.TRANSFORMED, Models.partial(CDGPartialModels.PUMPJACK_CRANK_ROD_LARGE))
                 .createInstance();
         shaft = instancerProvider().instancer(AllInstanceTypes.ROTATING, Models.partial(AllPartialModels.SHAFT))
                 .createInstance();

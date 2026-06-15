@@ -1,6 +1,6 @@
 package com.jesz.createdieselgenerators.blocks.renderer;
 
-import com.jesz.createdieselgenerators.PartialModels;
+import com.jesz.createdieselgenerators.CDGPartialModels;
 import com.jesz.createdieselgenerators.blocks.entity.BasinLidBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
@@ -24,7 +24,7 @@ public class BasinLidRenderer extends SafeBlockEntityRenderer<BasinLidBlockEntit
 
         Direction facing = be.getBlockState().getValue(HORIZONTAL_FACING);
 
-        CachedBuffers.partial(PartialModels.SMALL_GAUGE_DIAL, be.getBlockState())
+        CachedBuffers.partial(CDGPartialModels.SMALL_GAUGE_DIAL, be.getBlockState())
                 .center()
                 .rotateYDegrees(-facing.toYRot()+180)
                 .translate(0.5625f, -0.375, 0.5f)

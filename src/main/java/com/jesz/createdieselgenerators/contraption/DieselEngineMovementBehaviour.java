@@ -1,7 +1,5 @@
 package com.jesz.createdieselgenerators.contraption;
 
-import com.jesz.createdieselgenerators.config.ConfigRegistry;
-import com.jesz.createdieselgenerators.sounds.SoundRegistry;
 import com.simibubi.create.api.behaviour.movement.MovementBehaviour;
 import com.simibubi.create.content.contraptions.behaviour.MovementContext;
 import com.simibubi.create.content.trains.entity.CarriageContraption;
@@ -10,6 +8,9 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 
 import static com.jesz.createdieselgenerators.blocks.DieselGeneratorBlock.TURBOCHARGED;
+
+import com.jesz.createdieselgenerators.CDGConfig;
+import com.jesz.createdieselgenerators.CDGSounds;
 
 public class DieselEngineMovementBehaviour implements MovementBehaviour {
     @Override
@@ -25,9 +26,9 @@ public class DieselEngineMovementBehaviour implements MovementBehaviour {
         CarriageContraption contraption = ((CarriageContraption)context.contraption);
         CarriageContraptionEntity entity = (CarriageContraptionEntity) contraption.entity;
         double trainSpeed = context.motion.length()*2;
-        if(ConfigRegistry.ENGINES_EMIT_SOUND_ON_TRAINS.get() && !entity.getCarriage().train.derailed && trainSpeed >= 0.1){
+        if(CDGConfig.ENGINES_EMIT_SOUND_ON_TRAINS.get() && !entity.getCarriage().train.derailed && trainSpeed >= 0.1){
             if(context.data.getInt("tick") >= 10/ Mth.clamp(trainSpeed*10, 4, 5)){
-                context.world.playLocalSound(context.position.x, context.position.y, context.position.z, SoundRegistry.DIESEL_ENGINE_SOUND.getMainEvent(), SoundSource.BLOCKS, 0.5f, (float) Mth.clamp(context.state.hasProperty(TURBOCHARGED) && context.state.getValue(TURBOCHARGED) ? 3f*trainSpeed : 2f*trainSpeed, 1, 2.4), false);
+                context.world.playLocalSound(context.position.x, context.position.y, context.position.z, CDGSounds.DIESEL_ENGINE_SOUND.getMainEvent(), SoundSource.BLOCKS, 0.5f, (float) Mth.clamp(context.state.hasProperty(TURBOCHARGED) && context.state.getValue(TURBOCHARGED) ? 3f*trainSpeed : 2f*trainSpeed, 1, 2.4), false);
 
                 context.data.putInt("tick", 0);
             }

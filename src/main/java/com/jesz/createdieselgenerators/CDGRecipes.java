@@ -1,6 +1,12 @@
-package com.jesz.createdieselgenerators.recipes;
+package com.jesz.createdieselgenerators;
 
-import com.jesz.createdieselgenerators.CreateDieselGenerators;
+import com.jesz.createdieselgenerators.content.basin_lid.BasinFermentingRecipe;
+import com.jesz.createdieselgenerators.content.bulk_fermenter.BulkFermentingRecipe;
+import com.jesz.createdieselgenerators.content.distillation.DistillationRecipe;
+import com.jesz.createdieselgenerators.content.molds.CastingRecipe;
+import com.jesz.createdieselgenerators.content.molds.CompressionMoldingRecipe;
+import com.jesz.createdieselgenerators.content.tools.hammer.HammerRecipe;
+import com.jesz.createdieselgenerators.content.tools.wire_cutters.WireCuttingRecipe;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
@@ -19,17 +25,23 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Locale;
 import java.util.function.Supplier;
 
-public enum RecipeRegistry implements IRecipeTypeInfo {
+public enum CDGRecipes implements IRecipeTypeInfo {
 
     BASIN_FERMENTING(BasinFermentingRecipe::new),
-    DISTILLATION(DistillationRecipe::new);
+    BULK_FERMENTING(BulkFermentingRecipe::new),
+    DISTILLATION(DistillationRecipe::new),
+    COMPRESSION_MOLDING(CompressionMoldingRecipe::new),
+    CASTING(CastingRecipe::new),
+    WIRE_CUTTING(WireCuttingRecipe::new),
+    HAMMERING(HammerRecipe::new);
+
     private final ResourceLocation id;
     private final RecipeSerializer<?> serializerObject;
     @Nullable
     private final RecipeType<?> typeObject;
     private final Supplier<RecipeType<?>> type;
 
-    RecipeRegistry(Supplier<RecipeSerializer<?>> serializerSupplier) {
+    CDGRecipes(Supplier<RecipeSerializer<?>> serializerSupplier) {
         String name = CreateLang.asId(name());
         id = CreateDieselGenerators.asResource(name);
         serializerObject = Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, id, serializerSupplier.get());
@@ -38,13 +50,11 @@ public enum RecipeRegistry implements IRecipeTypeInfo {
         type = () -> typeObject;
     }
 
-    RecipeRegistry(ProcessingRecipeBuilder.ProcessingRecipeFactory<?> processingFactory) {
+    CDGRecipes(ProcessingRecipeBuilder.ProcessingRecipeFactory<?> processingFactory) {
         this(() -> new ProcessingRecipeSerializer<>(processingFactory));
     }
 
-    public static void register() {
-
-    }
+    public static void register() {}
 
     public static <T extends Recipe<?>> RecipeType<T> simpleType(ResourceLocation id) {
         String stringId = id.toString();

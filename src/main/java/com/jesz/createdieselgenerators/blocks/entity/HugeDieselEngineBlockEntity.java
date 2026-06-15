@@ -1,11 +1,11 @@
 package com.jesz.createdieselgenerators.blocks.entity;
 
-import com.jesz.createdieselgenerators.blocks.BlockRegistry;
+import com.jesz.createdieselgenerators.CDGBlocks;
+import com.jesz.createdieselgenerators.CDGSounds;
 import com.jesz.createdieselgenerators.blocks.DieselGeneratorBlock;
 import com.jesz.createdieselgenerators.blocks.PoweredEngineShaftBlock;
 import com.jesz.createdieselgenerators.compat.computercraft.CCProxy;
 import com.jesz.createdieselgenerators.other.FuelTypeManager;
-import com.jesz.createdieselgenerators.sounds.SoundRegistry;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.compat.computercraft.AbstractComputerBehaviour;
 import com.simibubi.create.content.contraptions.bearing.WindmillBearingBlockEntity;
@@ -116,7 +116,7 @@ public class HugeDieselEngineBlockEntity extends SmartBlockEntity implements IHa
             float shaftR = facing == Direction.NORTH ? 180 : facing == Direction.SOUTH ? 0 : facing == Direction.EAST ? 0 : facing == Direction.WEST ? 180 : facing == Direction.DOWN ? 90 : -90;
 
             if((oldAngle+shaftR) % 360 > (angle+shaftR) % 360) {
-                level.playLocalSound(worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), SoundRegistry.DIESEL_ENGINE_SOUND.getMainEvent(), SoundSource.BLOCKS, 1f,1f, false);
+                level.playLocalSound(worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), CDGSounds.DIESEL_ENGINE_SOUND.getMainEvent(), SoundSource.BLOCKS, 1f,1f, false);
             }
             oldAngle = angle;
 
@@ -212,7 +212,7 @@ public class HugeDieselEngineBlockEntity extends SmartBlockEntity implements IHa
     public Float getTargetAngle() {
         float angle;
         BlockState state = getBlockState();
-        if (!BlockRegistry.HUGE_DIESEL_ENGINE.has(state))
+        if (!CDGBlocks.HUGE_DIESEL_ENGINE.has(state))
             return null;
 
         Direction facing = state.getValue(FACING);

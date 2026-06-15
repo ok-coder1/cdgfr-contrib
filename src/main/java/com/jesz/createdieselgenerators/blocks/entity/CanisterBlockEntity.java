@@ -1,6 +1,6 @@
 package com.jesz.createdieselgenerators.blocks.entity;
 
-import com.jesz.createdieselgenerators.config.ConfigRegistry;
+import com.jesz.createdieselgenerators.CDGConfig;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BehaviourType;
@@ -49,8 +49,8 @@ public class CanisterBlockEntity extends SmartBlockEntity implements IHaveGoggle
 
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-        var capacity = Math.abs(ConfigRegistry.CANISTER_CAPACITY.get() * 81);
-        var capacityAddition = ConfigRegistry.CANISTER_CAPACITY_ENCHANTMENT.get() * 81;
+        var capacity = Math.abs(CDGConfig.CANISTER_CAPACITY.get() * 81);
+        var capacityAddition = CDGConfig.CANISTER_CAPACITY_ENCHANTMENT.get() * 81;
         tank = CapacityEnchantedFluidTankBehaviour.single(this, capacity, capacityAddition);
         behaviours.add(tank);
     }

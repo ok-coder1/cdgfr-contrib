@@ -2,7 +2,7 @@ package com.jesz.createdieselgenerators.items;
 
 import com.jesz.createdieselgenerators.CreateDieselGenerators;
 import com.jesz.createdieselgenerators.CreateDieselGeneratorsClient;
-import com.jesz.createdieselgenerators.PartialModels;
+import com.jesz.createdieselgenerators.CDGPartialModels;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.item.render.CustomRenderedItemModel;
 import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer;
@@ -21,11 +21,11 @@ public class LighterItemRenderer extends CustomRenderedItemModelRenderer {
         String skinName = CreateDieselGeneratorsClient.lighterSkins.containsKey(name) ? name : "standard";
         try {
             if (stack.getTag() == null || stack.getTag().getInt("Type") == 0)
-                renderer.render(PartialModels.lighterSkinModels.get(skinName).getFirst().get(), light);
+                renderer.render(CDGPartialModels.lighterSkinModels.get(skinName).getFirst().get(), light);
             else if (stack.getTag().getInt("Type") == 2)
-                renderer.render(PartialModels.lighterSkinModels.get(skinName).getSecond().getSecond().get(), light);
+                renderer.render(CDGPartialModels.lighterSkinModels.get(skinName).getSecond().getSecond().get(), light);
             else
-                renderer.render(PartialModels.lighterSkinModels.get(skinName).getSecond().getFirst().get(), light);
+                renderer.render(CDGPartialModels.lighterSkinModels.get(skinName).getSecond().getFirst().get(), light);
 
         } catch (NullPointerException e) {
             renderer.render(model.getOriginalModel(), light);

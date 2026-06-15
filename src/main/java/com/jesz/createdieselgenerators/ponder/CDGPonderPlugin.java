@@ -1,7 +1,7 @@
 package com.jesz.createdieselgenerators.ponder;
 
-import com.jesz.createdieselgenerators.blocks.BlockRegistry;
-import com.jesz.createdieselgenerators.items.ItemRegistry;
+import com.jesz.createdieselgenerators.CDGBlocks;
+import com.jesz.createdieselgenerators.CDGItems;
 import com.simibubi.create.infrastructure.ponder.AllCreatePonderTags;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
 import com.tterrag.registrate.util.entry.RegistryEntry;
@@ -20,23 +20,23 @@ public class CDGPonderPlugin implements PonderPlugin {
     public void registerScenes(PonderSceneRegistrationHelper<ResourceLocation> helper) {
         PonderPlugin.super.registerScenes(helper);
         PonderSceneRegistrationHelper<ItemProviderEntry<?>> HELPER = helper.withKeyFunction(RegistryEntry::getId);
-        HELPER.forComponents(ItemRegistry.DISTILLATION_CONTROLLER)
+        HELPER.forComponents(CDGItems.DISTILLATION_CONTROLLER)
                 .addStoryBoard("distillation_tower", DistillationScenes::distillation);
-        HELPER.forComponents(BlockRegistry.DIESEL_ENGINE)
+        HELPER.forComponents(CDGBlocks.DIESEL_ENGINE)
                 .addStoryBoard("diesel_engine", DieselEngineScenes::small);
-        HELPER.forComponents(BlockRegistry.DIESEL_ENGINE)
+        HELPER.forComponents(CDGBlocks.DIESEL_ENGINE)
                 .addStoryBoard("engine_silencer", DieselEngineScenes::silencer);
-        HELPER.forComponents(BlockRegistry.MODULAR_DIESEL_ENGINE)
+        HELPER.forComponents(CDGBlocks.MODULAR_DIESEL_ENGINE)
                 .addStoryBoard("large_diesel_engine", DieselEngineScenes::modular);
-        HELPER.forComponents(BlockRegistry.MODULAR_DIESEL_ENGINE)
+        HELPER.forComponents(CDGBlocks.MODULAR_DIESEL_ENGINE)
                 .addStoryBoard("engine_silencer", DieselEngineScenes::silencer);
-        HELPER.forComponents(ItemRegistry.ENGINE_SILENCER)
+        HELPER.forComponents(CDGItems.ENGINE_SILENCER)
                 .addStoryBoard("engine_silencer", DieselEngineScenes::silencer);
-        HELPER.forComponents(BlockRegistry.BASIN_LID)
+        HELPER.forComponents(CDGBlocks.BASIN_LID)
                 .addStoryBoard("basin_fermenting_station", BasinScenes::basin_lid);
-        HELPER.forComponents(BlockRegistry.HUGE_DIESEL_ENGINE)
+        HELPER.forComponents(CDGBlocks.HUGE_DIESEL_ENGINE)
                 .addStoryBoard("huge_diesel_engine", DieselEngineScenes::huge);
-        HELPER.forComponents(BlockRegistry.PUMPJACK_BEARING, BlockRegistry.PUMPJACK_CRANK, BlockRegistry.PUMPJACK_HEAD)
+        HELPER.forComponents(CDGBlocks.PUMPJACK_BEARING, CDGBlocks.PUMPJACK_CRANK, CDGBlocks.PUMPJACK_HEAD)
                 .addStoryBoard("pumpjack", OilScenes::pumpjack);
     }
         @Override
@@ -45,14 +45,14 @@ public class CDGPonderPlugin implements PonderPlugin {
 
             PonderTagRegistrationHelper<RegistryEntry<?>> HELPER = helper.withKeyFunction(RegistryEntry::getId);
             HELPER.addToTag(AllCreatePonderTags.KINETIC_SOURCES)
-                    .add(BlockRegistry.DIESEL_ENGINE)
-                    .add(BlockRegistry.MODULAR_DIESEL_ENGINE)
-                    .add(BlockRegistry.HUGE_DIESEL_ENGINE);
+                    .add(CDGBlocks.DIESEL_ENGINE)
+                    .add(CDGBlocks.MODULAR_DIESEL_ENGINE)
+                    .add(CDGBlocks.HUGE_DIESEL_ENGINE);
             HELPER.addToTag(AllCreatePonderTags.KINETIC_APPLIANCES)
-                    .add(BlockRegistry.BASIN_LID)
-                    .add(BlockRegistry.PUMPJACK_BEARING);
+                    .add(CDGBlocks.BASIN_LID)
+                    .add(CDGBlocks.PUMPJACK_BEARING);
             HELPER.addToTag(AllCreatePonderTags.DISPLAY_SOURCES)
-                    .add(BlockRegistry.DIESEL_ENGINE)
-                    .add(BlockRegistry.MODULAR_DIESEL_ENGINE);
+                    .add(CDGBlocks.DIESEL_ENGINE)
+                    .add(CDGBlocks.MODULAR_DIESEL_ENGINE);
         }
     }

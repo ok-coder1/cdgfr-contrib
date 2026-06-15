@@ -1,7 +1,7 @@
 package com.jesz.createdieselgenerators.blocks.entity;
 
+import com.jesz.createdieselgenerators.CDGRecipes;
 import com.jesz.createdieselgenerators.recipes.BasinFermentingRecipe;
-import com.jesz.createdieselgenerators.recipes.RecipeRegistry;
 import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
@@ -135,7 +135,7 @@ public class BasinLidBlockEntity extends BasinOperatingBlockEntity {
     }
     @Override
     protected <C extends Container> boolean matchStaticFilters(Recipe<C> recipe) {
-        return recipe.getType() == RecipeRegistry.BASIN_FERMENTING.getType();
+        return recipe.getType() == CDGRecipes.BASIN_FERMENTING.getType();
     }
 
 

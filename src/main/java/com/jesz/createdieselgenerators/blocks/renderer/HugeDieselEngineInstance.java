@@ -1,6 +1,6 @@
 package com.jesz.createdieselgenerators.blocks.renderer;
 
-import com.jesz.createdieselgenerators.PartialModels;
+import com.jesz.createdieselgenerators.CDGPartialModels;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
 import com.jesz.createdieselgenerators.blocks.entity.HugeDieselEngineBlockEntity;
 import com.jesz.createdieselgenerators.blocks.entity.PoweredEngineShaftBlockEntity;
@@ -31,11 +31,11 @@ public class HugeDieselEngineInstance extends AbstractBlockEntityVisual<HugeDies
 
     public HugeDieselEngineInstance(VisualizationContext context, HugeDieselEngineBlockEntity blockEntity, float pt) {
         super(context, blockEntity, pt);
-        piston = instancerProvider().instancer(InstanceTypes.TRANSFORMED, Models.partial(PartialModels.ENGINE_PISTON))
+        piston = instancerProvider().instancer(InstanceTypes.TRANSFORMED, Models.partial(CDGPartialModels.ENGINE_PISTON))
                 .createInstance();
-        connector = instancerProvider().instancer(InstanceTypes.TRANSFORMED, Models.partial(PartialModels.ENGINE_PISTON_CONNECTOR))
+        connector = instancerProvider().instancer(InstanceTypes.TRANSFORMED, Models.partial(CDGPartialModels.ENGINE_PISTON_CONNECTOR))
                 .createInstance();
-        linkage = instancerProvider().instancer(InstanceTypes.TRANSFORMED, Models.partial(PartialModels.ENGINE_PISTON_LINKAGE))
+        linkage = instancerProvider().instancer(InstanceTypes.TRANSFORMED, Models.partial(CDGPartialModels.ENGINE_PISTON_LINKAGE))
                 .createInstance();
     }
 

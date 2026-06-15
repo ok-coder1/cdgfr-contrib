@@ -1,9 +1,9 @@
 package com.jesz.createdieselgenerators.blocks.entity;
 
+import com.jesz.createdieselgenerators.CDGSounds;
 import com.jesz.createdieselgenerators.blocks.LargeDieselGeneratorBlock;
 import com.jesz.createdieselgenerators.compat.computercraft.CCProxy;
 import com.jesz.createdieselgenerators.other.FuelTypeManager;
-import com.jesz.createdieselgenerators.sounds.SoundRegistry;
 import com.simibubi.create.compat.computercraft.AbstractComputerBehaviour;
 import com.simibubi.create.content.contraptions.bearing.WindmillBearingBlockEntity;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
@@ -191,7 +191,7 @@ public class LargeDieselGeneratorBlockEntity extends GeneratingKineticBlockEntit
             TransferUtil.insertFluid(controller.tank.getPrimaryHandler(), tank.getPrimaryHandler().getFluid());
             TransferUtil.extractFluid(tank.getPrimaryHandler(), tank.getPrimaryHandler().getFluid());
         if (soundCounter > FuelTypeManager.getSoundSpeed(controller.tank.getPrimaryHandler().getFluid().getFluid()) && controller.validFuel && !getBlockState().getValue(SILENCED)) {
-            level.playLocalSound(worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), SoundRegistry.DIESEL_ENGINE_SOUND.getMainEvent(), SoundSource.BLOCKS, 0.5f, 1f, false);
+            level.playLocalSound(worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), CDGSounds.DIESEL_ENGINE_SOUND.getMainEvent(), SoundSource.BLOCKS, 0.5f, 1f, false);
             soundCounter = 0;
         }
         else

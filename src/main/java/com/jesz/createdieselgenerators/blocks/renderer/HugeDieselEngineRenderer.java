@@ -1,6 +1,6 @@
 package com.jesz.createdieselgenerators.blocks.renderer;
 
-import com.jesz.createdieselgenerators.PartialModels;
+import com.jesz.createdieselgenerators.CDGPartialModels;
 import com.jesz.createdieselgenerators.blocks.entity.HugeDieselEngineBlockEntity;
 import com.jesz.createdieselgenerators.blocks.entity.PoweredEngineShaftBlockEntity;
 import dev.engine_room.flywheel.api.backend.Backend;
@@ -38,7 +38,7 @@ public class HugeDieselEngineRenderer extends SafeBlockEntityRenderer<HugeDiesel
         Direction facing = state.getValue(FACING);
         Direction.Axis facingAxis = facing.getAxis();
         if (angle == null){
-            transformed(PartialModels.ENGINE_PISTON, state, facing, false)
+            transformed(CDGPartialModels.ENGINE_PISTON, state, facing, false)
                     .translate(0, 0.53475, 0)
                     .light(light)
                     .renderInto(ms, vb);
@@ -48,7 +48,7 @@ public class HugeDieselEngineRenderer extends SafeBlockEntityRenderer<HugeDiesel
 
         PoweredEngineShaftBlockEntity shaft = be.getShaft();
         if(shaft == null){
-            transformed(PartialModels.ENGINE_PISTON, state, facing, false)
+            transformed(CDGPartialModels.ENGINE_PISTON, state, facing, false)
                     .translate(0, 0.53475, 0)
                     .light(light)
                     .renderInto(ms, vb);
@@ -66,12 +66,12 @@ public class HugeDieselEngineRenderer extends SafeBlockEntityRenderer<HugeDiesel
         float sine2 = Mth.sin(angle - Mth.HALF_PI) * (state.getValue(FACING).getAxis() == Direction.Axis.Y ? -1 : 1);
         float piston = ((1 - sine) / 4) + 0.4375f;
 
-        transformed(PartialModels.ENGINE_PISTON, state, facing, roll90)
+        transformed(CDGPartialModels.ENGINE_PISTON, state, facing, roll90)
                 .translate(0, piston, 0)
                 .light(light)
                 .renderInto(ms, vb);
 
-        transformed(PartialModels.ENGINE_PISTON_LINKAGE, state, facing, roll90)
+        transformed(CDGPartialModels.ENGINE_PISTON_LINKAGE, state, facing, roll90)
                 .center()
                 .translate(0, 1, 0)
                 .uncenter()
@@ -82,7 +82,7 @@ public class HugeDieselEngineRenderer extends SafeBlockEntityRenderer<HugeDiesel
                 .light(light)
                 .renderInto(ms, vb);
         if(shaft.isEngineForConnectorDisplay(be.getBlockPos()))
-            transformed(PartialModels.ENGINE_PISTON_CONNECTOR, state, facing, roll90)
+            transformed(CDGPartialModels.ENGINE_PISTON_CONNECTOR, state, facing, roll90)
                     .translate(0, 2, 0)
                     .center()
                     .rotateX(-angle + Mth.HALF_PI)

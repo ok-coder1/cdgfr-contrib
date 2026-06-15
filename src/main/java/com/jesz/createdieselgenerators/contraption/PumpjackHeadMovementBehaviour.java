@@ -23,7 +23,7 @@ import net.minecraft.nbt.NbtUtils;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
-import static com.jesz.createdieselgenerators.PartialModels.PUMPJACK_ROPE;
+import static com.jesz.createdieselgenerators.CDGPartialModels.PUMPJACK_ROPE;
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING;
 
 public class PumpjackHeadMovementBehaviour implements MovementBehaviour {

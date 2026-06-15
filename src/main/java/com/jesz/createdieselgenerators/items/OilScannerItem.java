@@ -1,7 +1,8 @@
 package com.jesz.createdieselgenerators.items;
 
+import com.jesz.createdieselgenerators.CDGConfig;
 import com.jesz.createdieselgenerators.CreateDieselGenerators;
-import com.jesz.createdieselgenerators.config.ConfigRegistry;
+import com.jesz.createdieselgenerators.CDGItems;
 import com.jesz.createdieselgenerators.world.OilChunksSavedData;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.AllTags;
@@ -38,7 +39,7 @@ public class OilScannerItem extends Item {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 
-        if(player.getY() < ConfigRegistry.MAX_OIL_SCANNER_LEVEL.get()) {
+        if(player.getY() < CDGConfig.MAX_OIL_SCANNER_LEVEL.get()) {
             stack.getOrCreateTag().putInt("Time", 20);
             stack.getOrCreateTag().putInt("Type", 0);
             if(player instanceof ServerPlayer sp){
@@ -100,7 +101,7 @@ public class OilScannerItem extends Item {
 
     public void registerModelOverrides() {
         EnvExecutor.runWhenOn(EnvType.CLIENT, () -> () -> {
-            ItemProperties.register(ItemRegistry.OIL_SCANNER.get(), new ResourceLocation("createdieselgenerators:oil_scanner_state"), (pStack, pLevel, pEntity, pSeed) -> {
+            ItemProperties.register(CDGItems.OIL_SCANNER.get(), new ResourceLocation("createdieselgenerators:oil_scanner_state"), (pStack, pLevel, pEntity, pSeed) -> {
                 CompoundTag tag = pStack.getTag();
                 return tag == null ? 0 : tag.getInt("Type");
             });

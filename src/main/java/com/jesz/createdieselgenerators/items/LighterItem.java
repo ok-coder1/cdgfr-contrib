@@ -1,6 +1,7 @@
 package com.jesz.createdieselgenerators.items;
 
-import com.jesz.createdieselgenerators.config.ConfigRegistry;
+import com.jesz.createdieselgenerators.CDGConfig;
+import com.jesz.createdieselgenerators.CDGItems;
 import com.jesz.createdieselgenerators.other.CombustionHelper;
 import com.jesz.createdieselgenerators.other.CombustionHelper.PointExplosion;
 import com.jesz.createdieselgenerators.other.FuelTypeManager;
@@ -65,7 +66,7 @@ public class LighterItem extends Item implements CapacityEnchantment.ICapacityEn
                 return;
             }
             var v = EnchantmentHelper.getItemEnchantmentLevel(AllEnchantments.CAPACITY.get(), stack);
-            components.add(CreateLang.fluidName(fStack).component().withStyle(ChatFormatting.GRAY).append(" ").append(CreateLang.number(fStack.getAmount()).style(ChatFormatting.GOLD).component()).append(Component.translatable("create.generic.unit.millibuckets").withStyle(ChatFormatting.GOLD)).append(Component.literal(" / ")).append(CreateLang.number(ConfigRegistry.TOOL_CAPACITY.get() + v*ConfigRegistry.TOOL_CAPACITY_ENCHANTMENT.get()).style(ChatFormatting.GRAY).component()).append(Component.translatable("create.generic.unit.millibuckets").withStyle(ChatFormatting.GRAY)));
+            components.add(CreateLang.fluidName(fStack).component().withStyle(ChatFormatting.GRAY).append(" ").append(CreateLang.number(fStack.getAmount()).style(ChatFormatting.GOLD).component()).append(Component.translatable("create.generic.unit.millibuckets").withStyle(ChatFormatting.GOLD)).append(Component.literal(" / ")).append(CreateLang.number(CDGConfig.TOOL_CAPACITY.get() + v*CDGConfig.TOOL_CAPACITY_ENCHANTMENT.get()).style(ChatFormatting.GRAY).component()).append(Component.translatable("create.generic.unit.millibuckets").withStyle(ChatFormatting.GRAY)));
             return;
         }
         components.add(Component.translatable("createdieselgenerators.tooltip.empty").withStyle(ChatFormatting.GRAY));
@@ -142,7 +143,7 @@ public class LighterItem extends Item implements CapacityEnchantment.ICapacityEn
 
         if (!CampfireBlock.canLight(blockstate) && !CandleBlock.canLight(blockstate)
                 && !CandleCakeBlock.canLight(blockstate)) {
-            if (ConfigRegistry.COMBUSTIBLES_BLOW_UP.get()) {
+            if (CDGConfig.COMBUSTIBLES_BLOW_UP.get()) {
                 Optional<PointExplosion> opt = CombustionHelper.detectAndClean(level, blockpos.getX(), blockpos.getY(),
                         blockpos.getZ());
 
@@ -224,17 +225,17 @@ public class LighterItem extends Item implements CapacityEnchantment.ICapacityEn
             return 0;
         CompoundTag tankCompound = stack.getTag().getCompound("Fluid");
         var v = EnchantmentHelper.getItemEnchantmentLevel(AllEnchantments.CAPACITY.get(), stack);
-        return Math.round(13 * Mth.clamp(FluidStack.loadFluidStackFromNBT(tankCompound).getAmount()/((float)ConfigRegistry.TOOL_CAPACITY.get() + v*ConfigRegistry.TOOL_CAPACITY_ENCHANTMENT.get()), 0, 1));
+        return Math.round(13 * Mth.clamp(FluidStack.loadFluidStackFromNBT(tankCompound).getAmount()/((float)CDGConfig.TOOL_CAPACITY.get() + v*CDGConfig.TOOL_CAPACITY_ENCHANTMENT.get()), 0, 1));
     }
 
     @Override
     public Storage<FluidVariant> getFluidStorage(ItemStack stack, ContainerItemContext context) {
-        return new FluidHandlerItemStack(context, ConfigRegistry.TOOL_CAPACITY.get());
+        return new FluidHandlerItemStack(context, CDGConfig.TOOL_CAPACITY.get());
     }
 
     @Override
     public boolean onEntityItemUpdate(ItemStack stack, ItemEntity itemEntity) {
-        if(itemEntity.getItem().is(ItemRegistry.LIGHTER.get()) && ConfigRegistry.COMBUSTIBLES_BLOW_UP.get() && itemEntity.getItem().getTag() != null) {
+        if(itemEntity.getItem().is(CDGItems.LIGHTER.get()) && CDGConfig.COMBUSTIBLES_BLOW_UP.get() && itemEntity.getItem().getTag() != null) {
             if(itemEntity.getItem().getTag().getInt("Type") == 2) {
                 FluidState fState = itemEntity.level().getFluidState(new BlockPos(itemEntity.getBlockX(), itemEntity.getBlockY(), itemEntity.getBlockZ()));
                 if(fState.is(Fluids.WATER) || fState.is(Fluids.FLOWING_WATER)) {

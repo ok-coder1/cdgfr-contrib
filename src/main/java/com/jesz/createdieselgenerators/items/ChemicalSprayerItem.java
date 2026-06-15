@@ -1,6 +1,6 @@
 package com.jesz.createdieselgenerators.items;
 
-import com.jesz.createdieselgenerators.config.ConfigRegistry;
+import com.jesz.createdieselgenerators.CDGConfig;
 import com.jesz.createdieselgenerators.entity.ChemicalSprayerProjectileEntity;
 import com.jesz.createdieselgenerators.other.FuelTypeManager;
 import com.simibubi.create.AllEnchantments;
@@ -55,7 +55,7 @@ public class ChemicalSprayerItem extends Item implements CustomArmPoseItem, Capa
                 return;
             }
             var v = EnchantmentHelper.getItemEnchantmentLevel(AllEnchantments.CAPACITY.get(), stack);
-            components.add(CreateLang.fluidName(fStack).component().withStyle(ChatFormatting.GRAY).append(" ").append(CreateLang.number(fStack.getAmount()).style(ChatFormatting.GOLD).component()).append(Component.translatable("create.generic.unit.millibuckets").withStyle(ChatFormatting.GOLD)).append(Component.literal(" / ")).append(CreateLang.number(ConfigRegistry.TOOL_CAPACITY.get() + v*ConfigRegistry.TOOL_CAPACITY_ENCHANTMENT.get()).style(ChatFormatting.GRAY).component()).append(Component.translatable("create.generic.unit.millibuckets").withStyle(ChatFormatting.GRAY)));
+            components.add(CreateLang.fluidName(fStack).component().withStyle(ChatFormatting.GRAY).append(" ").append(CreateLang.number(fStack.getAmount()).style(ChatFormatting.GOLD).component()).append(Component.translatable("create.generic.unit.millibuckets").withStyle(ChatFormatting.GOLD)).append(Component.literal(" / ")).append(CreateLang.number(CDGConfig.TOOL_CAPACITY.get() + v*CDGConfig.TOOL_CAPACITY_ENCHANTMENT.get()).style(ChatFormatting.GRAY).component()).append(Component.translatable("create.generic.unit.millibuckets").withStyle(ChatFormatting.GRAY)));
             return;
         }
         components.add(Component.translatable("createdieselgenerators.tooltip.empty").withStyle(ChatFormatting.GRAY));
@@ -145,12 +145,12 @@ public class ChemicalSprayerItem extends Item implements CustomArmPoseItem, Capa
         var v = EnchantmentHelper.getItemEnchantmentLevel(AllEnchantments.CAPACITY.get(), stack);
 
         return Math.round(13 * Mth.clamp(FluidStack.loadFluidStackFromNBT(tankCompound).getAmount()/(
-                (float)ConfigRegistry.TOOL_CAPACITY.get() + v*ConfigRegistry.TOOL_CAPACITY_ENCHANTMENT.get()
+                (float)CDGConfig.TOOL_CAPACITY.get() + v*CDGConfig.TOOL_CAPACITY_ENCHANTMENT.get()
         ), 0, 1));
     }
 
     @Override
     public Storage<FluidVariant> getFluidStorage(ItemStack stack, ContainerItemContext context) {
-        return new FluidHandlerItemStack(context, ConfigRegistry.TOOL_CAPACITY.get());
+        return new FluidHandlerItemStack(context, CDGConfig.TOOL_CAPACITY.get());
     }
 }

@@ -1,6 +1,6 @@
 package com.jesz.createdieselgenerators.items;
 
-import com.jesz.createdieselgenerators.config.ConfigRegistry;
+import com.jesz.createdieselgenerators.CDGConfig;
 import com.simibubi.create.AllEnchantments;
 import com.simibubi.create.content.equipment.armor.CapacityEnchantment;
 import com.simibubi.create.foundation.utility.CreateLang;
@@ -56,7 +56,7 @@ public class CanisterBlockItem extends BlockItem implements CapacityEnchantment.
                             .style(ChatFormatting.GOLD).component())
                     .append(Component.translatable("create.generic.unit.millibuckets").withStyle(ChatFormatting.GOLD))
                     .append(Component.literal(" / "))
-                    .append(CreateLang.number(ConfigRegistry.CANISTER_CAPACITY.get() + ConfigRegistry.CANISTER_CAPACITY_ENCHANTMENT.get() * v)
+                    .append(CreateLang.number(CDGConfig.CANISTER_CAPACITY.get() + CDGConfig.CANISTER_CAPACITY_ENCHANTMENT.get() * v)
                             .style(ChatFormatting.GRAY).component())
                     .append(Component.translatable("create.generic.unit.millibuckets").withStyle(ChatFormatting.GRAY)));
             this.getBlock().appendHoverText(stack, level, components, tooltipFlag);
@@ -104,13 +104,13 @@ public class CanisterBlockItem extends BlockItem implements CapacityEnchantment.
             return 0;
         CompoundTag primaryTankCompound = stack.getTag().getCompound("BlockEntityTag").getList("Tanks", Tag.TAG_COMPOUND).getCompound(0).getCompound("TankContent");
         var v = EnchantmentHelper.getItemEnchantmentLevel(AllEnchantments.CAPACITY.get(), stack);
-        return Math.round(13 * Mth.clamp(FluidStack.loadFluidStackFromNBT(primaryTankCompound).getAmount()/(float)(ConfigRegistry.CANISTER_CAPACITY.get()+ ConfigRegistry.CANISTER_CAPACITY_ENCHANTMENT.get() * v), 0, 1));
+        return Math.round(13 * Mth.clamp(FluidStack.loadFluidStackFromNBT(primaryTankCompound).getAmount()/(float)(CDGConfig.CANISTER_CAPACITY.get()+ CDGConfig.CANISTER_CAPACITY_ENCHANTMENT.get() * v), 0, 1));
     }
 
 
     @Override
     public Storage<FluidVariant> getFluidStorage(ItemStack stack, ContainerItemContext context) {
-        return new CanisterFluidHandlerItemStack(context, ConfigRegistry.CANISTER_CAPACITY.get());
+        return new CanisterFluidHandlerItemStack(context, CDGConfig.CANISTER_CAPACITY.get());
     }
 
     static class CanisterFluidHandlerItemStack extends FluidHandlerItemStack {

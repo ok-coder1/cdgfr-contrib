@@ -1,6 +1,5 @@
 package com.jesz.createdieselgenerators.ponder;
 
-import com.jesz.createdieselgenerators.fluids.FluidRegistry;
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
 import com.simibubi.create.foundation.ponder.CreateSceneBuilder;
 import net.createmod.ponder.api.scene.SceneBuilder;
@@ -15,6 +14,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
 import static com.jesz.createdieselgenerators.blocks.BasinLidBlock.ON_A_BASIN;
+
+import com.jesz.createdieselgenerators.CDGFluids;
 
 public class BasinScenes {
     public static void basin_lid(SceneBuilder builder, SceneBuildingUtil util) {
@@ -68,7 +69,7 @@ public class BasinScenes {
         scene.world().setKineticSpeed(util.select().position(3, 0, 0), 16f);
         scene.world().setKineticSpeed(util.select().position(3, 1, 1),-16f);
         scene.idle(10);
-        FluidStack content = new FluidStack(FluidRegistry.ETHANOL.get()
+        FluidStack content = new FluidStack(CDGFluids.ETHANOL.get()
                 .getSource(), 50);
         //scene.world.modifyBlockEntity(tankPos, FluidTankBlockEntity.class, be -> TransferUtil.insertFluid(be.getTankInventory(), content));
         scene.world().modifyBlockEntity(util.grid().at(4, 0, 1), FluidTankBlockEntity.class, be ->

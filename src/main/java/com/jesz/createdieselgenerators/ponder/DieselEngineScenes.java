@@ -1,7 +1,7 @@
 package com.jesz.createdieselgenerators.ponder;
 
-import com.jesz.createdieselgenerators.fluids.FluidRegistry;
-import com.jesz.createdieselgenerators.items.ItemRegistry;
+import com.jesz.createdieselgenerators.CDGFluids;
+import com.jesz.createdieselgenerators.CDGItems;
 import com.jesz.createdieselgenerators.other.FuelTypeManager;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
@@ -67,7 +67,7 @@ public class DieselEngineScenes {
         scene.idle(30);
         FuelTypeManager.tryPopulateTags();
         Supplier<FluidStack> content = () -> {
-            currentFuel = new FluidStack(FuelTypeManager.fuelTypes.isEmpty() ? FluidRegistry.DIESEL.get() : FuelTypeManager.fuelTypes.keySet().stream().toList().get(new Random().nextInt(0, FuelTypeManager.fuelTypes.size() - 1)), 16000);
+            currentFuel = new FluidStack(FuelTypeManager.fuelTypes.isEmpty() ? CDGFluids.DIESEL.get() : FuelTypeManager.fuelTypes.keySet().stream().toList().get(new Random().nextInt(0, FuelTypeManager.fuelTypes.size() - 1)), 16000);
             return currentFuel;
         };
         scene.world().modifyBlockEntity(util.grid().at(4, 0, 1), FluidTankBlockEntity.class, be -> TransferUtil.insertFluid(be.getTankInventory(), content.get()));
@@ -121,7 +121,7 @@ public class DieselEngineScenes {
 
         FuelTypeManager.tryPopulateTags();
         Supplier<FluidStack> content = () -> {
-            currentFuel = new FluidStack(FuelTypeManager.fuelTypes.isEmpty() ? FluidRegistry.DIESEL.get() : FuelTypeManager.fuelTypes.keySet().stream().toList().get(new Random().nextInt(0, FuelTypeManager.fuelTypes.size() - 1)), 16000);
+            currentFuel = new FluidStack(FuelTypeManager.fuelTypes.isEmpty() ? CDGFluids.DIESEL.get() : FuelTypeManager.fuelTypes.keySet().stream().toList().get(new Random().nextInt(0, FuelTypeManager.fuelTypes.size() - 1)), 16000);
             return currentFuel;
         };
         scene.world().modifyBlockEntity(util.grid().at(4, 1, 3), FluidTankBlockEntity.class, be -> TransferUtil.insertFluid(be.getTankInventory(), content.get()));
@@ -150,7 +150,7 @@ public class DieselEngineScenes {
         BlockPos engine = util.grid().at(1, 1, 1);
 
         ElementLink<EntityElement> entity1 =
-                scene.world().createItemEntity(new Vec3(1, 2, 1), util.vector().of(0, 0.2, 0), ItemRegistry.ENGINE_SILENCER.asStack());
+                scene.world().createItemEntity(new Vec3(1, 2, 1), util.vector().of(0, 0.2, 0), CDGItems.ENGINE_SILENCER.asStack());
 
         scene.overlay().showText(60)
                 .attachKeyFrame()
@@ -165,7 +165,7 @@ public class DieselEngineScenes {
         scene.world().setKineticSpeed(util.select().position(engine), 96f);
         scene.idle(20);
         scene.overlay().showControls(util.vector().blockSurface(engine, Direction.UP), Pointing.DOWN, 20)
-                .withItem(ItemRegistry.ENGINE_SILENCER.asStack())
+                .withItem(CDGItems.ENGINE_SILENCER.asStack())
                 .rightClick();
         scene.world().modifyBlock(engine, s -> s.setValue(SILENCED, true), false);
         scene.idle(20);
@@ -231,7 +231,7 @@ public class DieselEngineScenes {
 
         FuelTypeManager.tryPopulateTags();
         Supplier<FluidStack> content = () -> {
-            currentFuel = new FluidStack(FuelTypeManager.fuelTypes.isEmpty() ? FluidRegistry.DIESEL.get() : FuelTypeManager.fuelTypes.keySet().stream().toList().get(new Random().nextInt(0, FuelTypeManager.fuelTypes.size() - 1)), 16000);
+            currentFuel = new FluidStack(FuelTypeManager.fuelTypes.isEmpty() ? CDGFluids.DIESEL.get() : FuelTypeManager.fuelTypes.keySet().stream().toList().get(new Random().nextInt(0, FuelTypeManager.fuelTypes.size() - 1)), 16000);
             return currentFuel;
         };
         scene.world().modifyBlockEntity(util.grid().at(4, 1, 3), FluidTankBlockEntity.class, be -> TransferUtil.insertFluid(be.getTankInventory(), content.get()));

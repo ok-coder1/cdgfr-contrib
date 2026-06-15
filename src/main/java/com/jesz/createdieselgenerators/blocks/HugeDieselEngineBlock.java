@@ -1,9 +1,10 @@
 package com.jesz.createdieselgenerators.blocks;
 
+import com.jesz.createdieselgenerators.CDGBlocks;
+import com.jesz.createdieselgenerators.CDGConfig;
 import com.jesz.createdieselgenerators.blocks.entity.BlockEntityRegistry;
 import com.jesz.createdieselgenerators.blocks.entity.HugeDieselEngineBlockEntity;
 import com.jesz.createdieselgenerators.blocks.entity.PoweredEngineShaftBlockEntity;
-import com.jesz.createdieselgenerators.config.ConfigRegistry;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
@@ -98,7 +99,7 @@ public class HugeDieselEngineBlock extends Block implements IBE<HugeDieselEngine
         if (placementHelper.matchesItem(itemInHand))
             return placementHelper.getOffset(player, level, state, pos, hit)
                     .placeInWorld(level, (BlockItem) itemInHand.getItem(), player, hand, hit);
-        if(!ConfigRegistry.ENGINES_FILLED_WITH_ITEMS.get())
+        if(!CDGConfig.ENGINES_FILLED_WITH_ITEMS.get())
             return super.use(state, level, pos, player, hand, hit);
         if (itemInHand.isEmpty())
             return InteractionResult.PASS;
@@ -318,7 +319,7 @@ public class HugeDieselEngineBlock extends Block implements IBE<HugeDieselEngine
             level.removeBlockEntity(pos);
         BlockPos shaftPos = pos.relative(state.getValue(FACING), 2);
         BlockState shaftState = level.getBlockState(shaftPos);
-        if (BlockRegistry.POWERED_ENGINE_SHAFT.has(shaftState))
+        if (CDGBlocks.POWERED_ENGINE_SHAFT.has(shaftState))
             level.scheduleTick(shaftPos, shaftState.getBlock(), 1);
     }
     @Override
@@ -383,7 +384,7 @@ public class HugeDieselEngineBlock extends Block implements IBE<HugeDieselEngine
 
             Direction.Axis axis = shaft.getValue(ShaftBlock.AXIS);
             return PlacementOffset.success(shaftPos,
-                    s -> BlockHelper.copyProperties(s, BlockRegistry.POWERED_ENGINE_SHAFT.getDefaultState())
+                    s -> BlockHelper.copyProperties(s, CDGBlocks.POWERED_ENGINE_SHAFT.getDefaultState())
                             .setValue(PoweredShaftBlock.AXIS, axis));
         }
     }

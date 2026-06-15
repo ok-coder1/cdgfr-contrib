@@ -1,6 +1,6 @@
 package com.jesz.createdieselgenerators.ponder;
 
-import com.jesz.createdieselgenerators.blocks.BlockRegistry;
+import com.jesz.createdieselgenerators.CDGBlocks;
 import com.jesz.createdieselgenerators.blocks.entity.PumpjackCrankBlockEntity;
 import com.simibubi.create.AllItems;
 import net.createmod.ponder.api.element.ElementLink;
@@ -37,7 +37,7 @@ public class OilScenes {
         scene.idle(30);
         scene.overlay().showControls(util.vector().topOf(4, 5, 8), Pointing.LEFT, 15).withItem(AllItems.WRENCH.asStack());
         scene.idle(15);
-        scene.world().setBlock(new BlockPos(4, 5, 8), BlockRegistry.PUMPJACK_BEARING_B.getDefaultState(), false);
+        scene.world().setBlock(new BlockPos(4, 5, 8), CDGBlocks.PUMPJACK_BEARING_B.getDefaultState(), false);
         scene.idle(30);
         scene.overlay().showControls(util.vector().topOf(4, 5, 8), Pointing.LEFT, 15).withItem(AllItems.SUPER_GLUE.asStack());
         scene.idle(25);
@@ -84,7 +84,7 @@ public class OilScenes {
         scene.world().setBlock(new BlockPos(4, 3, 0), Blocks.AIR.defaultBlockState(), false);
 
         scene.idle(15);
-        scene.world().setBlock(new BlockPos(4, 3, 0), BlockRegistry.PUMPJACK_HOLE.getDefaultState(), false);
+        scene.world().setBlock(new BlockPos(4, 3, 0), CDGBlocks.PUMPJACK_HOLE.getDefaultState(), false);
 
         scene.idle(15);
         scene.overlay().showText(50)

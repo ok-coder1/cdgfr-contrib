@@ -1,8 +1,8 @@
-package com.jesz.createdieselgenerators.config;
+package com.jesz.createdieselgenerators;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 
-public class ConfigRegistry {
+public class CDGConfig {
     public static final ForgeConfigSpec.Builder SERVER_BUILDER = new ForgeConfigSpec.Builder();
     public static final ForgeConfigSpec.Builder CLIENT_BUILDER = new ForgeConfigSpec.Builder();
 
@@ -44,6 +44,7 @@ public class ConfigRegistry {
     public static final ForgeConfigSpec.ConfigValue<Boolean> MODULAR_ENGINES;
     public static final ForgeConfigSpec.ConfigValue<Boolean> HUGE_ENGINES;
     public static final ForgeConfigSpec.ConfigValue<Boolean> ENGINES_FILLED_WITH_ITEMS;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> ENGINES_DISABLED_WITH_REDSTONE;
 
     static {
 
@@ -74,7 +75,9 @@ public class ConfigRegistry {
                     .define("Huge Diesel Engines", true);
 
             ENGINES_FILLED_WITH_ITEMS = SERVER_BUILDER.comment("Whenever Diesel Engines can be filled with an Item")
-                    .define("Engines can be filled with a bucket", false);
+                    .define("Engines filled with a bucket", false);
+            ENGINES_DISABLED_WITH_REDSTONE = SERVER_BUILDER.comment("Whenever Diesel Engines can be disabled with redstone")
+                    .define("Engines disabled with redstone", true);
 
         SERVER_BUILDER.pop();
 
@@ -92,8 +95,6 @@ public class ConfigRegistry {
             HIGH_OIL_PERCENTAGE = SERVER_BUILDER.comment("High oil chunks percentage")
                     .defineInRange("High oil chunks percentage", 10d, 0d, 100d);
             SERVER_BUILDER.push("Distillation");
-                DISTILLATION_WIDE_TANK_FASTER = SERVER_BUILDER.comment("Whenever wide Distillation Towers go faster than the thin ones")
-                        .define("Wide Distillation Tower Distill Faster", true);
                 DISTILLATION_LEVEL_HEIGHT = SERVER_BUILDER.comment("Height of Distillation Tower level")
                         .defineInRange("Height of Distillation Tower level", 1, 1, 3);
             SERVER_BUILDER.pop();
@@ -114,7 +115,7 @@ public class ConfigRegistry {
         TOOL_CAPACITY = SERVER_BUILDER.comment("Capacity of Tools requiring Fluids in mB")
                 .define("Capacity of Tools requiring Fluids",200);
         TOOL_CAPACITY_ENCHANTMENT = SERVER_BUILDER.comment("Tool Capacity Enchantment Capacity Addition in mB")
-                .define("Capacity Addition of Tools with Capacity Enchantment",10);
+                .define("Capacity Addition of Tools with Capacity Enchantment",100);
 
         COMBUSTIBLES_BLOW_UP = SERVER_BUILDER.comment("Combustibles do boom boom when on fire")
                 .define("Combustibles blow up",true);

@@ -1,6 +1,6 @@
 package com.jesz.createdieselgenerators.blocks.entity;
 
-import com.jesz.createdieselgenerators.config.ConfigRegistry;
+import com.jesz.createdieselgenerators.CDGConfig;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.IMultiBlockEntityContainer;
@@ -322,7 +322,7 @@ public class OilBarrelBlockEntity extends SmartBlockEntity implements IMultiBloc
 
     @Override
     public int getMaxWidth() {
-        return ConfigRegistry.MAX_OIL_BARREL_WIDTH.get();
+        return CDGConfig.MAX_OIL_BARREL_WIDTH.get();
     }
 
     @Override

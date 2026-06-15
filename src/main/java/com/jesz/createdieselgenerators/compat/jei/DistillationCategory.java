@@ -1,6 +1,6 @@
 package com.jesz.createdieselgenerators.compat.jei;
 
-import com.jesz.createdieselgenerators.recipes.DistillationRecipe;
+import com.jesz.createdieselgenerators.content.distillation.DistillationRecipe;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;

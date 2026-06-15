@@ -14,12 +14,11 @@ import com.simibubi.create.foundation.item.ItemHelper;
 import com.simibubi.create.foundation.utility.CreateLang;
 import net.createmod.catnip.data.Pair;
 import io.github.fabricators_of_create.porting_lib.fluids.FluidStack;
-import mezz.jei.api.fabric.constants.FabricTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
-import mezz.jei.api.gui.ingredient.IRecipeSlotTooltipCallback;
+import mezz.jei.api.gui.ingredient.IRecipeSlotRichTooltipCallback;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -38,7 +37,7 @@ public class BasinFermentingCategory extends CreateRecipeCategory<BasinRecipe> {
         super(info);
     }
 
-    public static IRecipeSlotTooltipCallback addStochasticTooltip2(ProcessingOutput output) {
+    public static IRecipeSlotRichTooltipCallback addStochasticTooltip2(ProcessingOutput output) {
         return (view, tooltip) -> {
             float chance = output.getChance();
             if (chance != 1)
@@ -85,7 +84,7 @@ public class BasinFermentingCategory extends CreateRecipeCategory<BasinRecipe> {
                     .addSlot(RecipeIngredientRole.OUTPUT, xPosition, yPosition)
                     .setBackground(getRenderedSlot(result), -1, -1)
                     .addItemStack(result.getStack())
-                    .addTooltipCallback(addStochasticTooltip2(result));
+                    .addRichTooltipCallback(addStochasticTooltip2(result));
             i++;
         }
 

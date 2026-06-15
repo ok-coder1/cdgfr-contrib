@@ -2,9 +2,7 @@ package com.jesz.createdieselgenerators;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import com.jesz.createdieselgenerators.blocks.ct.SpriteShifts;
-import com.jesz.createdieselgenerators.config.ConfigRegistry;
-import com.jesz.createdieselgenerators.fluids.FluidRegistry;
+import com.jesz.createdieselgenerators.content.tools.lighter.LighterModel;
 import com.jesz.createdieselgenerators.ponder.CDGPonderPlugin;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.createmod.catnip.data.Pair;
@@ -33,10 +31,10 @@ public class CreateDieselGeneratorsClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        PartialModels.init();
-        SpriteShifts.init();
+        CDGPartialModels.init();
+        CDGSpriteShifts.init();
         //ModLoadingContext.registerConfig(CreateDieselGenerators.ID,  ModConfig.Type.CLIENT, ConfigRegistry.CLIENT_SPEC);
-        ForgeConfigRegistry.INSTANCE.register(CreateDieselGenerators.ID, ModConfig.Type.CLIENT, ConfigRegistry.CLIENT_SPEC);
+        ForgeConfigRegistry.INSTANCE.register(CreateDieselGenerators.ID, ModConfig.Type.CLIENT, CDGConfig.CLIENT_SPEC);
         //ModelLoadingRegistry.INSTANCE.registerModelProvider(CreateDieselGeneratorsClient::onModelRegistry);
         PreparableModelLoadingPlugin.register(
                 new PreparableModelLoadingPlugin.DataLoader<Map<String, Pair<ResourceLocation, Pair<ResourceLocation, ResourceLocation>>>>() {
@@ -66,12 +64,14 @@ public class CreateDieselGeneratorsClient implements ClientModInitializer {
                                     , Pair.of(new ResourceLocation("createdieselgenerators:item/lighter/"+skinId+"_open")
                                             , new ResourceLocation("createdieselgenerators:item/lighter/"+skinId+"_ignited"))));
                         });
+
                         return CompletableFuture.supplyAsync(new Supplier<Map<String, Pair<ResourceLocation, Pair<ResourceLocation, ResourceLocation>>>>() {
                             @Override
                             public Map<String, Pair<ResourceLocation, Pair<ResourceLocation, ResourceLocation>>> get() {
                                 return resourceLocations;
                             }
                         }, executor);
+
                     }
                 },
                 new PreparableModelLoadingPlugin<Map<String, Pair<ResourceLocation, Pair<ResourceLocation, ResourceLocation>>>>() {
@@ -86,7 +86,7 @@ public class CreateDieselGeneratorsClient implements ClientModInitializer {
                         pluginContext.addModels(resourceLocationsAsList);
 
                         resourceLocations.forEach((skinId, pair) -> {
-                            PartialModels.lighterSkinModels.put(skinId, Pair.of(PartialModel.of(pair.getFirst())
+                            CDGPartialModels.lighterSkinModels.put(skinId, Pair.of(PartialModel.of(pair.getFirst())
                                     , Pair.of(PartialModel.of(pair.getSecond().getFirst())
                                             , PartialModel.of(pair.getSecond().getSecond()))));
                         });
@@ -100,7 +100,7 @@ public class CreateDieselGeneratorsClient implements ClientModInitializer {
 
         PonderIndex.addPlugin(new CDGPonderPlugin());
 
-        BlockRenderLayerMap.INSTANCE.putFluids(RenderType.translucent(), FluidRegistry.ETHANOL.get(), FluidRegistry.ETHANOL.get());
+        BlockRenderLayerMap.INSTANCE.putFluids(RenderType.translucent(), CDGFluids.ETHANOL.get(), CDGFluids.ETHANOL.get());
         //consumer.accept(SimpleCustomRenderer.create(this, new ChemicalSprayerItemRenderer()));
     }
 }

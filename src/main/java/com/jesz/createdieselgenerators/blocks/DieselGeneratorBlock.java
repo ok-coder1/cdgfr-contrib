@@ -1,9 +1,10 @@
 package com.jesz.createdieselgenerators.blocks;
 
+import com.jesz.createdieselgenerators.CDGBlocks;
+import com.jesz.createdieselgenerators.CDGConfig;
+import com.jesz.createdieselgenerators.CDGItems;
 import com.jesz.createdieselgenerators.blocks.entity.BlockEntityRegistry;
 import com.jesz.createdieselgenerators.blocks.entity.DieselGeneratorBlockEntity;
-import com.jesz.createdieselgenerators.config.ConfigRegistry;
-import com.jesz.createdieselgenerators.items.ItemRegistry;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.api.schematic.requirement.SpecialBlockItemRequirement;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
@@ -65,8 +66,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-import static com.jesz.createdieselgenerators.items.ItemRegistry.ENGINE_SILENCER;
-import static com.jesz.createdieselgenerators.items.ItemRegistry.ENGINE_TURBO;
+import static com.jesz.createdieselgenerators.CDGItems.ENGINE_SILENCER;
+import static com.jesz.createdieselgenerators.CDGItems.ENGINE_TURBO;
 import static net.minecraft.core.Direction.NORTH;
 import static net.minecraft.core.Direction.SOUTH;
 
@@ -77,7 +78,7 @@ public class DieselGeneratorBlock extends DirectionalKineticBlock implements Spe
     public static final BooleanProperty SILENCED = BooleanProperty.create("silenced");
     public static final BooleanProperty TURBOCHARGED = BooleanProperty.create("turbocharged");
     public enum EngineTypes{
-        NORMAL(ConfigRegistry.NORMAL_ENGINES), MODULAR(ConfigRegistry.MODULAR_ENGINES), HUGE(ConfigRegistry.HUGE_ENGINES);
+        NORMAL(CDGConfig.NORMAL_ENGINES), MODULAR(CDGConfig.MODULAR_ENGINES), HUGE(CDGConfig.HUGE_ENGINES);
 
         final Supplier<Boolean> isEnabled;
         EngineTypes(Supplier<Boolean> isEnabled){
@@ -197,7 +198,7 @@ public class DieselGeneratorBlock extends DirectionalKineticBlock implements Spe
             IWrenchable.playRotateSound(level, pos);
             return InteractionResult.SUCCESS;
         }
-        if(!ConfigRegistry.ENGINES_FILLED_WITH_ITEMS.get())
+        if(!CDGConfig.ENGINES_FILLED_WITH_ITEMS.get())
             return super.use(state, level, pos, player, hand, hit);
         if (itemInHand.isEmpty())
             return InteractionResult.PASS;
@@ -362,11 +363,11 @@ public class DieselGeneratorBlock extends DirectionalKineticBlock implements Spe
     @Override
     public ItemRequirement getRequiredItems(BlockState state, BlockEntity blockEntity) {
         List<ItemStack> list = new ArrayList<>();
-        list.add(BlockRegistry.DIESEL_ENGINE.asStack());
+        list.add(CDGBlocks.DIESEL_ENGINE.asStack());
         if(state.getValue(SILENCED))
-            list.add(ItemRegistry.ENGINE_SILENCER.asStack());
+            list.add(CDGItems.ENGINE_SILENCER.asStack());
         if(state.getValue(TURBOCHARGED))
-            list.add(ItemRegistry.ENGINE_TURBO.asStack());
+            list.add(CDGItems.ENGINE_TURBO.asStack());
         return new ItemRequirement(ItemRequirement.ItemUseType.CONSUME, list);
     }
 

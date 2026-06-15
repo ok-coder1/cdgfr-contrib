@@ -1,9 +1,10 @@
 package com.jesz.createdieselgenerators.blocks;
 
+import com.jesz.createdieselgenerators.CDGBlocks;
+import com.jesz.createdieselgenerators.CDGConfig;
+import com.jesz.createdieselgenerators.CDGItems;
 import com.jesz.createdieselgenerators.blocks.entity.BlockEntityRegistry;
 import com.jesz.createdieselgenerators.blocks.entity.LargeDieselGeneratorBlockEntity;
-import com.jesz.createdieselgenerators.config.ConfigRegistry;
-import com.jesz.createdieselgenerators.items.ItemRegistry;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.fluids.tank.CreativeFluidTankBlockEntity;
@@ -64,8 +65,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
+import static com.jesz.createdieselgenerators.CDGItems.ENGINE_SILENCER;
 import static com.jesz.createdieselgenerators.blocks.DieselGeneratorBlock.POWERED;
-import static com.jesz.createdieselgenerators.items.ItemRegistry.ENGINE_SILENCER;
 import static net.minecraft.core.Direction.NORTH;
 import static net.minecraft.core.Direction.SOUTH;
 
@@ -117,7 +118,7 @@ public class LargeDieselGeneratorBlock extends HorizontalKineticBlock implements
             IWrenchable.playRotateSound(level, pos);
             return InteractionResult.SUCCESS;
         }
-        if(!ConfigRegistry.ENGINES_FILLED_WITH_ITEMS.get())
+        if(!CDGConfig.ENGINES_FILLED_WITH_ITEMS.get())
             return super.use(state, level, pos, player, hand, hit);
         if (itemInHand.isEmpty())
             return InteractionResult.PASS;
@@ -313,9 +314,9 @@ public class LargeDieselGeneratorBlock extends HorizontalKineticBlock implements
     @Override
     public ItemRequirement getRequiredItems(BlockState state, BlockEntity blockEntity) {
         List<ItemStack> list = new ArrayList<>();
-        list.add(BlockRegistry.MODULAR_DIESEL_ENGINE.asStack());
+        list.add(CDGBlocks.MODULAR_DIESEL_ENGINE.asStack());
         if(state.getValue(SILENCED))
-            list.add(ItemRegistry.ENGINE_SILENCER.asStack());
+            list.add(CDGItems.ENGINE_SILENCER.asStack());
         return new ItemRequirement(ItemRequirement.ItemUseType.CONSUME, list);
     }
     @Override
@@ -336,12 +337,12 @@ public class LargeDieselGeneratorBlock extends HorizontalKineticBlock implements
     private static class PlacementHelper extends PoleHelper<Direction>{
 
         public PlacementHelper() {
-            super(BlockRegistry.MODULAR_DIESEL_ENGINE::has, state -> state.getValue(FACING).getAxis(), FACING);
+            super(CDGBlocks.MODULAR_DIESEL_ENGINE::has, state -> state.getValue(FACING).getAxis(), FACING);
         }
 
         @Override
         public Predicate<ItemStack> getItemPredicate() {
-            return BlockRegistry.MODULAR_DIESEL_ENGINE::isIn;
+            return CDGBlocks.MODULAR_DIESEL_ENGINE::isIn;
         }
     }
 }

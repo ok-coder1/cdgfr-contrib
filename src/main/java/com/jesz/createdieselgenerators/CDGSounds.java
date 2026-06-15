@@ -1,8 +1,8 @@
-package com.jesz.createdieselgenerators.sounds;
+package com.jesz.createdieselgenerators;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.jesz.createdieselgenerators.CreateDieselGenerators;
+
 import net.minecraft.core.Registry;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public class SoundRegistry {
+public class CDGSounds {
 
     public static final Map<ResourceLocation, SoundEntry> ALL = new HashMap<>();
 

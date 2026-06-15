@@ -1,8 +1,8 @@
 package com.jesz.createdieselgenerators.blocks.entity;
 
+import com.jesz.createdieselgenerators.CDGFluids;
 import com.jesz.createdieselgenerators.CreateDieselGenerators;
 import com.jesz.createdieselgenerators.TagRegistry;
-import com.jesz.createdieselgenerators.fluids.FluidRegistry;
 import com.jesz.createdieselgenerators.world.OilChunksSavedData;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.api.equipment.goggles.IHaveHoveringInformation;

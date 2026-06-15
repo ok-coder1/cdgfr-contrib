@@ -1,5 +1,6 @@
 package com.jesz.createdieselgenerators.blocks;
 
+import com.jesz.createdieselgenerators.CDGBlocks;
 import com.jesz.createdieselgenerators.blocks.entity.BlockEntityRegistry;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.kinetics.simpleRelays.ShaftBlock;
@@ -17,7 +18,7 @@ public class PoweredEngineShaftBlock extends PoweredShaftBlock {
     }
     public static BlockState getEquivalent(BlockState stateForPlacement) {
         if(stateForPlacement.getBlock() instanceof ShaftBlock)
-            return BlockRegistry.POWERED_ENGINE_SHAFT.getDefaultState()
+            return CDGBlocks.POWERED_ENGINE_SHAFT.getDefaultState()
                     .setValue(PoweredShaftBlock.AXIS, stateForPlacement.getValue(ShaftBlock.AXIS))
                     .setValue(WATERLOGGED, stateForPlacement.getValue(WATERLOGGED));
         return stateForPlacement;

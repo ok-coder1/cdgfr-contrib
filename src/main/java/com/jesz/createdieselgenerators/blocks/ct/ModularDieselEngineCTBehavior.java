@@ -13,10 +13,12 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import static com.jesz.createdieselgenerators.blocks.LargeDieselGeneratorBlock.FACING;
 
+import com.jesz.createdieselgenerators.CDGSpriteShifts;
+
 public class ModularDieselEngineCTBehavior extends ConnectedTextureBehaviour {
     @Override
     public CTSpriteShiftEntry getShift(BlockState state, Direction direction, TextureAtlasSprite sprite) {
-        return SpriteShifts.MODULAR_DIESEL_ENGINE;
+        return CDGSpriteShifts.MODULAR_DIESEL_ENGINE;
     }
 
     @Override

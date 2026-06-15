@@ -1,10 +1,10 @@
 package com.jesz.createdieselgenerators.blocks.entity;
 
+import com.jesz.createdieselgenerators.CDGConfig;
+import com.jesz.createdieselgenerators.CDGSounds;
 import com.jesz.createdieselgenerators.blocks.DieselGeneratorBlock;
 import com.jesz.createdieselgenerators.compat.computercraft.CCProxy;
-import com.jesz.createdieselgenerators.config.ConfigRegistry;
 import com.jesz.createdieselgenerators.other.FuelTypeManager;
-import com.jesz.createdieselgenerators.sounds.SoundRegistry;
 import com.simibubi.create.compat.computercraft.AbstractComputerBehaviour;
 import com.simibubi.create.content.contraptions.bearing.WindmillBearingBlockEntity;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
@@ -115,7 +115,7 @@ public class DieselGeneratorBlockEntity extends GeneratingKineticBlockEntity imp
     public float getGeneratedSpeed() {
         if(getBlockState().getValue(POWERED))
             return 0;
-        return convertToDirection((movementDirection.getValue() == 1 ? -1 : 1)* FuelTypeManager.getGeneratedSpeed(this, tank.getPrimaryHandler().getFluid().getFluid()), getBlockState().getValue(DieselGeneratorBlock.FACING))*(getBlockState().getValue(TURBOCHARGED) ? ConfigRegistry.TURBOCHARGED_ENGINE_MULTIPLIER.get().floatValue() : 1);
+        return convertToDirection((movementDirection.getValue() == 1 ? -1 : 1)* FuelTypeManager.getGeneratedSpeed(this, tank.getPrimaryHandler().getFluid().getFluid()), getBlockState().getValue(DieselGeneratorBlock.FACING))*(getBlockState().getValue(TURBOCHARGED) ? CDGConfig.TURBOCHARGED_ENGINE_MULTIPLIER.get().floatValue() : 1);
     }
 
     @Override
@@ -138,7 +138,7 @@ public class DieselGeneratorBlockEntity extends GeneratingKineticBlockEntity imp
             if (getBlockState().getValue(TURBOCHARGED) ? soundTick > FuelTypeManager.getSoundSpeed(tank.getPrimaryHandler().getFluid().getFluid()) / 2 : soundTick > FuelTypeManager.getSoundSpeed(tank.getPrimaryHandler().getFluid().getFluid())) {
                 if (validFuel) {
                     soundTick = 0;
-                    level.playLocalSound(worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), SoundRegistry.DIESEL_ENGINE_SOUND.getMainEvent(), SoundSource.BLOCKS, getBlockState().getValue(TURBOCHARGED) ? 0.5f : 0.3f, getBlockState().getValue(TURBOCHARGED) ? 1.1f : 1f, false);
+                    level.playLocalSound(worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), CDGSounds.DIESEL_ENGINE_SOUND.getMainEvent(), SoundSource.BLOCKS, getBlockState().getValue(TURBOCHARGED) ? 0.5f : 0.3f, getBlockState().getValue(TURBOCHARGED) ? 1.1f : 1f, false);
                 }
             } else {
                 soundTick++;
@@ -153,9 +153,9 @@ public class DieselGeneratorBlockEntity extends GeneratingKineticBlockEntity imp
         if (partialSecond >= 20) {
             partialSecond = 0;
             if (validFuel) {
-                if (tank.getPrimaryHandler().getFluid().getAmount() >= FuelTypeManager.getBurnRate(this, tank.getPrimaryHandler().getFluid().getFluid()) * (!getBlockState().getValue(TURBOCHARGED) ? 1 : ConfigRegistry.TURBOCHARGED_ENGINE_BURN_RATE_MULTIPLIER.get().floatValue()))
+                if (tank.getPrimaryHandler().getFluid().getAmount() >= FuelTypeManager.getBurnRate(this, tank.getPrimaryHandler().getFluid().getFluid()) * (!getBlockState().getValue(TURBOCHARGED) ? 1 : CDGConfig.TURBOCHARGED_ENGINE_BURN_RATE_MULTIPLIER.get().floatValue()))
                     tank.getPrimaryHandler().setFluid(FluidHelper.copyStackWithAmount(tank.getPrimaryHandler().getFluid(),
-                            (int) (tank.getPrimaryHandler().getFluid().getAmount() - FuelTypeManager.getBurnRate(this, tank.getPrimaryHandler().getFluid().getFluid()) * (!getBlockState().getValue(TURBOCHARGED) ? 1 : ConfigRegistry.TURBOCHARGED_ENGINE_BURN_RATE_MULTIPLIER.get().floatValue()))));
+                            (int) (tank.getPrimaryHandler().getFluid().getAmount() - FuelTypeManager.getBurnRate(this, tank.getPrimaryHandler().getFluid().getFluid()) * (!getBlockState().getValue(TURBOCHARGED) ? 1 : CDGConfig.TURBOCHARGED_ENGINE_BURN_RATE_MULTIPLIER.get().floatValue()))));
                 else
                     tank.getPrimaryHandler().setFluid(FluidStack.EMPTY);
             }

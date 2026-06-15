@@ -1,6 +1,6 @@
 package com.jesz.createdieselgenerators.blocks.renderer;
 
-import com.jesz.createdieselgenerators.PartialModels;
+import com.jesz.createdieselgenerators.CDGPartialModels;
 import com.jesz.createdieselgenerators.blocks.entity.DistillationTankBlockEntity;
 import dev.engine_room.flywheel.lib.transform.TransformStack;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -88,7 +88,7 @@ public class DistillationTankRenderer extends SafeBlockEntityRenderer<Distillati
 
         for (Direction d : Iterate.horizontalDirections) {
             ms.pushPose();
-            CachedBuffers.partial(PartialModels.DISTILLATION_GAUGE, blockState)
+            CachedBuffers.partial(CDGPartialModels.DISTILLATION_GAUGE, blockState)
                     .rotateYDegrees(d.toYRot())
                     .uncenter()
                     .translate(be.getWidth() / 2f - 6 / 16f, 0, 0)

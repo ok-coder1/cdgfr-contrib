@@ -1,5 +1,6 @@
 package com.jesz.createdieselgenerators.blocks.ct;
 
+import com.jesz.createdieselgenerators.CDGSpriteShifts;
 import com.jesz.createdieselgenerators.blocks.DistillationTankBlock;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.content.fluids.tank.FluidTankBlock;
@@ -17,10 +18,10 @@ public class DistillationTankCTBehavior extends ConnectedTextureBehaviour.Base {
     @Override
     public @Nullable CTSpriteShiftEntry getShift(BlockState state, Direction direction, @Nullable TextureAtlasSprite sprite) {
         if(direction.getAxis().isVertical())
-            return SpriteShifts.DISTILLATION_TANK_TOP;
+            return CDGSpriteShifts.DISTILLATION_TANK_TOP;
         if(direction == Direction.NORTH)
-            return SpriteShifts.DISTILLATION_TANK_NORTH;
-        return SpriteShifts.DISTILLATION_TANK;
+            return CDGSpriteShifts.DISTILLATION_TANK_NORTH;
+        return CDGSpriteShifts.DISTILLATION_TANK;
     }
 
     @Override

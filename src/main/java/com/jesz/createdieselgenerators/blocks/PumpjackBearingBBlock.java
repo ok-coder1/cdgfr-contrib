@@ -1,5 +1,6 @@
 package com.jesz.createdieselgenerators.blocks;
 
+import com.jesz.createdieselgenerators.CDGBlocks;
 import com.simibubi.create.content.contraptions.bearing.BearingBlock;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import net.fabricmc.fabric.api.block.BlockPickInteractionAware;
@@ -26,7 +27,7 @@ public class PumpjackBearingBBlock extends Block implements IWrenchable, BlockPi
     }
     @Override
     public InteractionResult onWrenched(BlockState state, UseOnContext context) {
-        context.getLevel().setBlock(context.getClickedPos(), BlockRegistry.PUMPJACK_BEARING.getDefaultState().setValue(BearingBlock.FACING, state.getValue(FACING)), 2);
+        context.getLevel().setBlock(context.getClickedPos(), CDGBlocks.PUMPJACK_BEARING.getDefaultState().setValue(BearingBlock.FACING, state.getValue(FACING)), 2);
         return InteractionResult.SUCCESS;
     }
 
@@ -34,12 +35,12 @@ public class PumpjackBearingBBlock extends Block implements IWrenchable, BlockPi
 
     @Override
     public ItemStack getPickedStack(BlockState state, BlockGetter view, BlockPos pos, @Nullable Player player, @Nullable HitResult result) {
-        return BlockRegistry.PUMPJACK_BEARING.asStack();
+        return CDGBlocks.PUMPJACK_BEARING.asStack();
     }
 
     @Override
     public Item asItem() {
-        return BlockRegistry.PUMPJACK_BEARING.asStack().getItem();
+        return CDGBlocks.PUMPJACK_BEARING.asStack().getItem();
     }
 
     @Override

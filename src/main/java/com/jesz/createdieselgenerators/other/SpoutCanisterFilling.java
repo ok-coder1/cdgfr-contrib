@@ -1,7 +1,7 @@
 package com.jesz.createdieselgenerators.other;
 
+import com.jesz.createdieselgenerators.CDGConfig;
 import com.jesz.createdieselgenerators.blocks.entity.CanisterBlockEntity;
-import com.jesz.createdieselgenerators.config.ConfigRegistry;
 import com.simibubi.create.api.behaviour.spouting.BlockSpoutingBehaviour;
 import com.simibubi.create.content.fluids.spout.SpoutBlockEntity;
 import io.github.fabricators_of_create.porting_lib.fluids.FluidStack;
@@ -19,7 +19,7 @@ public class SpoutCanisterFilling implements BlockSpoutingBehaviour {
 
     @Override
     public long fillBlock(Level level, BlockPos pos, SpoutBlockEntity spout, FluidStack availableFluid, boolean simulate) {
-        if(!ConfigRegistry.CANISTER_SPOUT_FILLING.get())
+        if(!CDGConfig.CANISTER_SPOUT_FILLING.get())
             return 0;
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof @SuppressWarnings("unused") CanisterBlockEntity _be){

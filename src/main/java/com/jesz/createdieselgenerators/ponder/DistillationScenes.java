@@ -1,6 +1,6 @@
 package com.jesz.createdieselgenerators.ponder;
 
-import com.jesz.createdieselgenerators.items.ItemRegistry;
+import com.jesz.createdieselgenerators.CDGItems;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
 import com.simibubi.create.foundation.ponder.CreateSceneBuilder;
@@ -47,7 +47,7 @@ public class DistillationScenes {
                 .pointAt(util.vector().topOf(2, 2, 2))
                 .placeNearTarget();
         scene.idle(60);
-        scene.overlay().showControls(util.vector().topOf(3, 3, 2), Pointing.LEFT, 20).withItem(ItemRegistry.DISTILLATION_CONTROLLER.asStack(12));
+        scene.overlay().showControls(util.vector().topOf(3, 3, 2), Pointing.LEFT, 20).withItem(CDGItems.DISTILLATION_CONTROLLER.asStack(12));
         scene.idle(15);
         ElementLink<WorldSectionElement> distillationTankElement =
                 scene.world().showIndependentSectionImmediately(distillationTank);

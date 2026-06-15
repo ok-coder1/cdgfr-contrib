@@ -1,13 +1,13 @@
 package com.jesz.createdieselgenerators.compat.computercraft.peripherals;
 
-import com.jesz.createdieselgenerators.blocks.entity.LargeDieselGeneratorBlockEntity;
-import com.jesz.createdieselgenerators.other.FuelTypeManager;
+import com.jesz.createdieselgenerators.content.diesel_engine.normal.ModularDieselEngineBlockEntity;
+import com.jesz.createdieselgenerators.fueltype.FuelTypeManager;
 import com.simibubi.create.compat.computercraft.implementation.peripherals.SyncedPeripheral;
 
 
-//public class ModularDieselEnginePeripheral extends SyncedPeripheral<LargeDieselGeneratorBlockEntity> {
+//public class ModularDieselEnginePeripheral extends SyncedPeripheral<ModularDieselEngineBlockEntity> {
 //
-//    public ModularDieselEnginePeripheral(LargeDieselGeneratorBlockEntity blockEntity) {
+//    public ModularDieselEnginePeripheral(ModularDieselEngineBlockEntity blockEntity) {
 //        super(blockEntity);
 //    }
 //
@@ -28,7 +28,7 @@ import com.simibubi.create.compat.computercraft.implementation.peripherals.Synce
 //
 //    @LuaFunction
 //    public final float getStressCapacity(){
-//        LargeDieselGeneratorBlockEntity frontEngine = blockEntity.frontEngine.get();
+//        ModularDieselEngineBlockEntity frontEngine = blockEntity.controller;
 //
 //        if(frontEngine == null)
 //            return blockEntity.calculateAddedStressCapacity();
@@ -36,7 +36,7 @@ import com.simibubi.create.compat.computercraft.implementation.peripherals.Synce
 //    }
 //    @LuaFunction
 //    public final int getEngineMultiBlockSize(){
-//        LargeDieselGeneratorBlockEntity frontEngine = blockEntity.frontEngine.get();
+//        ModularDieselEngineBlockEntity frontEngine = blockEntity.controller;
 //
 //        if(frontEngine == null)
 //            return blockEntity.stacked;
@@ -44,7 +44,7 @@ import com.simibubi.create.compat.computercraft.implementation.peripherals.Synce
 //    }
 //    @LuaFunction
 //    public final float getSpeed(){
-//        LargeDieselGeneratorBlockEntity frontEngine = blockEntity.frontEngine.get();
+//        ModularDieselEngineBlockEntity frontEngine = blockEntity.controller;
 //        if(frontEngine == null)
 //            return Math.abs(blockEntity.getGeneratedSpeed());
 //        return Math.abs(frontEngine.getGeneratedSpeed());
@@ -52,7 +52,7 @@ import com.simibubi.create.compat.computercraft.implementation.peripherals.Synce
 //
 //    @LuaFunction
 //    public final float getFuelAmount(){
-//        LargeDieselGeneratorBlockEntity frontEngine = blockEntity.frontEngine.get();
+//        LargeDieselGeneratorBlockEntity frontEngine = blockEntity.controller;
 //        if(frontEngine == null)
 //            return blockEntity.tank.getPrimaryHandler().getFluid().getAmount();
 //        return frontEngine.tank.getPrimaryHandler().getFluid().getAmount();

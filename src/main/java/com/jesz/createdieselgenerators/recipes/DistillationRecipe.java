@@ -1,5 +1,6 @@
 package com.jesz.createdieselgenerators.recipes;
 
+import com.jesz.createdieselgenerators.CDGRecipes;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.foundation.item.SmartInventory;
@@ -7,7 +8,7 @@ import net.minecraft.world.level.Level;
 
 public class DistillationRecipe extends ProcessingRecipe<SmartInventory> {
     public DistillationRecipe(ProcessingRecipeBuilder.ProcessingRecipeParams params){
-        super(RecipeRegistry.DISTILLATION, params);
+        super(CDGRecipes.DISTILLATION, params);
 
     }
     @Override
